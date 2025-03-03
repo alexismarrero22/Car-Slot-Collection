@@ -12,6 +12,8 @@ function crearConexion() {
     return $conexion;
 }
 
+
+
 //creamos una funcion para obtener los usuarios que estan registrados
 function getUsers() {
     $db = crearConexion();
@@ -25,6 +27,7 @@ function getUsers() {
     } else {
         return "No hay usuarios";
     }
+    
 }
 
 //creamos una funcion para añadir usuarios
@@ -55,7 +58,7 @@ function deleteUser($name) {
 }
 
 
-print_r (getUsers()) ;
+//print_r (getUsers()) ;
 
 
 
