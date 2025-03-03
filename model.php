@@ -19,9 +19,9 @@ function getUsers() {
     $result = mysqli_query($db, $sql);
     mysqli_close($db);
     if (mysqli_num_rows($result) > 0) {
-        $rows = $result-> fetch_all(MYSQLI_ASSOC);
-
-        return $rows;
+        
+        return $result;
+        
     } else {
         return "No hay usuarios";
     }
