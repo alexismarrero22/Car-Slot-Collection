@@ -53,10 +53,7 @@ function deleteUser($name) {
         return "No hay usuarios";
     }
 }
-// echo addUser("Cristian","Suarez","cristianloco@gmail.com","1234");
-// echo    "";
-// echo    "hola\n";
-// echo    "";
+
 
 print_r (getUsers()) ;
 
