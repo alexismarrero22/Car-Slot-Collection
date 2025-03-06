@@ -21,7 +21,7 @@
 		}
 	
 	}
-	userController::showUsers();
+	userController::showUsers(); //forma de llamar a una función estática
 
 
 	
