@@ -1,5 +1,5 @@
 <?php
-    include "User.php";
+    include "../models/User.php";
 	class UserController {
 		public static function showUsers() {
 			$usuario = new User();

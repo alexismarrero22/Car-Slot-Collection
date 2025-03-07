@@ -1,5 +1,5 @@
 body {
-    background-color: lightblue;
+    background-color: lightgrey;
 }
 #logo {
     width: 25%;
@@ -35,17 +35,19 @@ nav ul li a:hover {
 }
 #contenido {
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 #pieDePagina{
-    width: 100%;
+    width: 25%;
     margin-top: 25%;
 }
 #terminosLegales{
     text-align: left;
 }
 #redesSociales{
+    
     text-align: right;
-    margin-right: 200px;
+    
+    
     
 }
