@@ -1,9 +1,10 @@
-var nombreUsuario = document.getElementById('nombreUsuario');
-var apellidosUsuario = document.getElementById('apellidosUsuario');
-var email = document.getElementById('email');
-var contraseña = document.getElementById('contraseña');
+
 
 function enviarFormulario(){
+    var nombreUsuario = document.getElementById('nombreUsuario');
+    var apellidosUsuario = document.getElementById('apellidosUsuario');
+    var email = document.getElementById('email');
+    var contraseña = document.getElementById('contraseña');
     console.log("Enviando formulario");
     //Array con los mensajes de error
     var mensajesError = [];
