@@ -1,5 +1,12 @@
 <?php
     include "../models/User.php";
+	$action =  $_GET["action"] ??"";
+	if ($action == "register") {
+		//userController::addUser();
+		echo"adduser";
+	}else{
+		userController::showUsers();
+	}
 	class UserController {
 		public static function showUsers() {
 			$usuario = new User();
@@ -21,7 +28,7 @@
 		}
 	
 	}
-	userController::showUsers(); //forma de llamar a una función estática
+	//userController::showUsers(); //forma de llamar a una función estática
 
 
 	
