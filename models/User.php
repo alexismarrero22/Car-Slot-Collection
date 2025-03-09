@@ -3,39 +3,72 @@
 require_once "accessbbdd.php";
 require_once "databaseConn.php";
 
-class User extends Database {
+class User extends Database
+{
     private $id;
     private $name;
     private $surname;
     private $email;
     private $password;
-    
+
     //el constructor solo se usa para inicializar la conexión, los valores se asignarán mas adelante a través de otros métodos
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
     }
     //Getters
-    public function getId(){  return $this->id;}
-    public function getName(){ return $this->name;}
-    public function getSurname(){ return $this->surname;}   
-    public function getEmail(){ return $this->email;}
-    public function getPassword(){ return $this->password;}
-    
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function getName()
+    {
+        return $this->name;
+    }
+    public function getSurname()
+    {
+        return $this->surname;
+    }
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
     //Setters
-    public function setId($id){$this->id=$id;}
-    public function setName($name){$this->name=$name;}  
-    public function setSurname($surname){$this->surname=$surname;}
-    public function setEmail($email){$this->email=$email;}
-    public function setPassword($password){$this->password=$password;}
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+    public function setSurname($surname)
+    {
+        $this->surname = $surname;
+    }
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
 
 
 
-  
+
 
 
     //Añadir un usuario
-    public function save(){
-        $sql = "INSERT INTO Users(name, surname,email,password) VALUES ('".$this->name."','".$this->surname."','".$this->email."','".$this->password."')";
+    public function save()
+    {
+        $sql = "INSERT INTO Users(name, surname,email,password) VALUES ('" . $this->name . "','" . $this->surname . "','" . $this->email . "','" . $this->password . "')";
         $result = $this->conexion->query($sql);
         return $result;
     }
@@ -57,33 +90,36 @@ class User extends Database {
 		}
 	}
  */
-public function getUsers() {
-    $sql = "SELECT * FROM Users"; 
-    $result = $this->conexion->query($sql);
+    public function getUsers()
+    {
+        $sql = "SELECT * FROM Users";
+        $result = $this->conexion->query($sql);
 
-    if (!$result) {
-        return "Error en la consulta: " . $this->conexion->error;
+        if (!$result) {
+            return "Error en la consulta: " . $this->conexion->error;
+        }
+
+        if ($result->num_rows == 0) {
+            return false;
+        }
+
+        return $result; // Devuelve el objeto mysqli_result para que showUsers() lo procese
     }
-
-    if ($result->num_rows == 0) {
-        return false; 
-    }
-
-    return $result; // Devuelve el objeto mysqli_result para que showUsers() lo procese
-}
     //Actualizar un usuario
-    public function update() {
-		$sql = "UPDATE User SET name = '" . $this->name . "', surname = '" . $this->surname . "', email = '" . $this->email . "', password = '" . $this->password . "' WHERE ID = " . $this->id;
-		$result = $this->conexion->query($sql);
-		return $result;
-	}
+    public function update()
+    {
+        $sql = "UPDATE User SET name = '" . $this->name . "', surname = '" . $this->surname . "', email = '" . $this->email . "', password = '" . $this->password . "' WHERE ID = " . $this->id;
+        $result = $this->conexion->query($sql);
+        return $result;
+    }
     //Eliminar un usuario
-    public function delete() {
+    public function delete()
+    {
         $sql = "DELETE FROM User WHERE ID = " . $this->id;
-		$result = $this->conexion->query($sql);
-		$this->__destruct();
-		return $result;
-	}
+        $result = $this->conexion->query($sql);
+        $this->__destruct();
+        return $result;
+    }
 
 
 }
