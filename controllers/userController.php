@@ -1,5 +1,12 @@
 <?php
     include "../models/User.php";
+	$action = isset($_GET["action"]) ? $_GET["action"] :"";
+	if ($action == "register") {
+		userController::addUser();
+	}else{
+		userController::showUsers();
+	}
+
 	class UserController {
 		public static function showUsers() {
 			$usuario = new User();
@@ -19,9 +26,25 @@
 				}
 			}
 		}
+		public static function addUser() {
+			
+			$nombre = $_POST['nombreUsuario'] ?? '';
+			$apellido = $_POST['apellidosUsuario'] ?? '';
+			$email=$_POST['email'] ?? '';
+			$password=$_POST['contrasegna'] ?? '';
+			if(empty($nombre) || empty($apellido) || empty($email) || empty($password)){
+				exit;
+			}
+			$usuario = new User();
+			$usuario->setName($nombre);
+			$usuario->setSurname($apellido);
+			$usuario->setEmail($email);
+			$usuario->setPassword($password);
+			$usuario->save();
+		}
 	
 	}
-	userController::showUsers(); //forma de llamar a una función estática
+	//userController::showUsers(); //forma de llamar a una función estática
 
 
 	

@@ -1,20 +1,21 @@
-var nombreUsuario = document.getElementById('nombreUsuario');
-var apellidosUsuario = document.getElementById('apellidosUsuario');
-var email = document.getElementById('email');
-var contraseña = document.getElementById('contraseña');
+var nombreUsuario = document.getElementById('nombreUsuario').value;
+var apellidosUsuario = document.getElementById('apellidosUsuario').value;
+var email = document.getElementById('email').value;
+var contrasegna = document.getElementById('contrasegna').value;
 
 function enviarFormulario(){
-    console.log("Enviando formulario");
+ 
+    console.log("Enviando formulario", nombreUsuario, apellidosUsuario, email, contrasegna);
     //Array con los mensajes de error
     var mensajesError = [];
     //Verificamos que se envía toda la información
-    if(nombreUsuario.value == null ||nombreUsuario.value=="")
+    if(nombreUsuario == null ||nombreUsuario=="")
         mensajesError.push("Falta el nombre del usuario");
-    if(apellidosUsuario.value == null ||apellidosUsuario.value =="")
+    if(apellidosUsuario == null ||apellidosUsuario =="")
         mensajesError.push("Faltan los apellidos del usuario");
-    if(email.value==null || email.value=="")
+    if(email==null || email=="")
         mensajesError.push("Falta el email");
-    if(contraseña.value == null || contraseña.value =="")
+    if(contrasegna == null || contrasegna =="")
         mensajesError.push("Falta la contraseña");
 
     error.innerHTML = mensajesError.join(", ");
