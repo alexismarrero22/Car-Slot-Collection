@@ -3,7 +3,7 @@
          <div id="contenido">
             <h1>Bienvenidos a Car Slot Collection</h1>
             <h2>Nuevo Usuario</h2>
-            <form id="nuevoUsuario" action="controllers/userController.php?action=register" method="post">
+            <form id="nuevoUsuario" action="controllers/userController.php?action=register" method="post" onsubmit ="return enviarFormulario(event)"  >
                 <label for="nombreUsuario">Nombre</label><br>
                 <input type="text" id="nombreUsuario" name="nombreUsuario"><br>
 
@@ -16,7 +16,7 @@
                 <label for="contraseña">Contraseña</label><br>
                 <input type="password" id="contraseña" name="contraseña"><br>
 
-                <input type="submit"  onclick ="return enviarFormulario()"   value ="Registrarse"><!--a donde mandamos esto?-->
+                <input type="submit"   value ="Registrarse"><!--a donde mandamos esto?-->
                 <input type="button" value ="Ya estoy registrado">
             </form>
             <div id="error" style="color:red;" ></div>

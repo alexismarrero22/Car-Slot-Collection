@@ -2,8 +2,8 @@
     include "../models/User.php";
 	$action =  $_GET["action"] ??"";
 	if ($action == "register") {
-		//userController::addUser();
-		echo"adduser";
+		userController::addUser();
+		
 	}else{
 		userController::showUsers();
 	}
@@ -25,6 +25,23 @@
 					);
 				}
 			}
+		}
+		public static function addUser() {
+			
+			$nombre = $_POST['nombreUsuario'] ?? '';
+			$apellido = $_POST['apellidosUsuario'] ?? '';
+			$email=$_POST['email'] ?? '';
+			$password=$_POST['contraseña'] ?? '';
+			if(empty($nombre) || empty($apellido) || empty($email) || empty($password)){
+				exit;
+			}
+			$usuario = new User();
+			$usuario->setName($nombre);
+			$usuario->setSurname($apellido);
+			$usuario->setEmail($email);
+			$usuario->setPassword($password);
+			$usuario->save();
+			header('Location: ../index.php');
 		}
 	
 	}
