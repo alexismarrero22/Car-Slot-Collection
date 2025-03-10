@@ -1,0 +1,21 @@
+body {
+    background-color: lightgrey;
+}
+
+
+#logo {
+
+    margin-left: 40%;
+}
+
+form {
+
+    text-align: center;
+    display: block;
+}
+
+label {
+    text-align: center;
+    display: block;
+
+}

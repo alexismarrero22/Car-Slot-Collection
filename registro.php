@@ -15,11 +15,12 @@
         <input type="text" id="email" name="email"><br>
 
         <label for="contraseña">Contraseña</label><br>
-        <input type="password" id="contraseña" name="contraseña"><br>
+        <input type="password" id="contraseña" name="contraseña"><br><br>
 
-        <input type="submit" value="Registrarse"><!--a donde mandamos esto?-->
-        <input type="button" value="Ya estoy registrado">
+        <input type="submit" value="Registrarse"><br><br>
+
     </form>
+    <button onclick="location.href='inicioSesion.php'">Ya estoy registrado</button>
     <div id="error" style="color:red;"></div>
 </div>
 <script src="js/users.js"></script>

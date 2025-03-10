@@ -73,23 +73,7 @@ class User extends Database
         return $result;
     }
 
-    //Ver los usuarios que hay registrados
-/*     public function getUsers() {
-		$sql = "SELECT * FROM User";
-		$result = $this->conexion->query($sql);
-		if ($result->num_rows > 0) {
-			$row = $result->fetch_assoc();
-			$this->setId($row['id']);
-			$this->setName($row['name']);
-			$this->setSurname($row['surname']);
-			$this->setEmail($row['email']);
-			$this->setPassword($row['password']);
-        
-		} else {
-			return false;
-		}
-	}
- */
+    //Mostrar usuarios
     public function getUsers()
     {
         $sql = "SELECT * FROM Users";
@@ -120,6 +104,23 @@ class User extends Database
         $this->__destruct();
         return $result;
     }
+
+    //Mostrar un único usuario
+    public function selectUserByEmailAndPassword($email, $password)
+    {
+        // Sentencia preparada para evitar inyección SQL
+        $sql = "SELECT * FROM Users WHERE email = ? AND password = ?";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param("ss", $email, $password); // "ss" indica que ambos son strings
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        return $result->fetch_assoc(); // Retorna un array asociativo con el usuario encontrado
+    }
+
+
+
 
 
 }

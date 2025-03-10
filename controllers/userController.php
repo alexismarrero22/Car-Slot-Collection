@@ -1,12 +1,18 @@
 <?php
 include "../models/User.php";
 $action = $_GET["action"] ?? "";
-if ($action == "register") {
-	userController::addUser();
-
-} else {
-	userController::showUsers();
+switch ($action) {
+	case "register":
+		userController::addUser();
+		break;
+	case "check":
+		userController::login();
+		break;
+	default:
+		userController::showUsers();
+		break;
 }
+
 class UserController
 {
 	public static function showUsers()
@@ -46,6 +52,29 @@ class UserController
 		$usuario->save();
 		header('Location: ../index.php');
 	}
+
+	public static function login()
+	{
+		$email = $_POST['emailUsuario'] ?? '';
+		$password = $_POST['password'] ?? '';
+		// Llamamos al modelo para obtener el usuario
+		$userModel = new User();
+		$usuario = $userModel->selectUserByEmailAndPassword($email, $password);
+
+		if ($usuario) {
+			// Usuario encontrado, se puede iniciar sesión
+			session_start();
+			$_SESSION['users_id'] = $usuario['id'];
+			$_SESSION['users_email'] = $usuario['email'];
+
+			header('Location: ../index.php');
+		} else {
+			// Usuario no encontrado
+			echo "Error: Usuario o contraseña incorrectos.";
+		}
+	}
+
+
 
 }
 //userController::showUsers(); //forma de llamar a una función estática

@@ -6,7 +6,7 @@ function enviarFormulario(event) {
     var apellidosUsuario = document.getElementById('apellidosUsuario');
     var email = document.getElementById('email');
     var contraseña = document.getElementById('contraseña');
-    console.log("Enviando formulario 2");
+    console.log("Enviando formulario");
     //Array con los mensajes de error
     var mensajesError = [];
     //Verificamos que se envía toda la información
