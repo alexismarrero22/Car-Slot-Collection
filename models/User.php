@@ -61,10 +61,6 @@ class User extends Database
     }
 
 
-
-
-
-
     //Añadir un usuario
     public function save()
     {
@@ -99,7 +95,7 @@ class User extends Database
     //Eliminar un usuario
     public function delete()
     {
-        $sql = "DELETE FROM User WHERE ID = " . $this->id;
+        $sql = "DELETE FROM Users WHERE ID = " . $this->id;
         $result = $this->conexion->query($sql);
         $this->__destruct();
         return $result;

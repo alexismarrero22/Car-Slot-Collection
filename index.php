@@ -2,7 +2,7 @@
 
 <!-- Divisor del contenido -->
 <div id="contenido">
-    <h1>Bienvenidos a Car Slot Collection</h1>
+    <h1>Bienvenid@s a Car Slot Collection</h1>
     <div id="contenidoIndex">
         galería de fotos
     </div>
