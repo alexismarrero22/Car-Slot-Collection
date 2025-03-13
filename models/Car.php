@@ -5,10 +5,11 @@ require_once "databaseConn.php";
 
 class Car extends Database
 {
-    private $idCar;
+    private $id_car;
     private $brand;
     private $model;
     private $manufacturer;
+    private $decoration;
     //el constructor solo se usa para inicializar la conexión, los valores se asignarán mas adelante a través de otros métodos
     public function __construct()
     {
@@ -17,7 +18,7 @@ class Car extends Database
     //getters
     public function getIdCar()
     {
-        return $this->idCar;
+        return $this->id_car;
     }
     public function getBrand()
     {
@@ -31,12 +32,17 @@ class Car extends Database
     {
         return $this->manufacturer;
     }
+    public function getDecoration()
+    {
+        return $this->decoration;
+    }
+
 
     //setters
 
-    public function setIdCar($idCar)
+    public function setIdCar($id_car)
     {
-        $this->id_car = $idCar;
+        $this->id_car = $id_car;
     }
     public function setBrand($brand)
     {
@@ -50,11 +56,16 @@ class Car extends Database
     {
         $this->manufacturer = $manufacturer;
     }
+    public function setDecoration($decoration)
+    {
+        $this->decoration = $decoration;
+    }
+
 
     //Añadir un coche
     public function saveCar()
     {
-        $sql = "INSERT INTO Cars(brand,model,manufacturer) VALUES ('" . $this->brand . "','" . $this->model . "','" . $this->manufacturer . "')";
+        $sql = "INSERT INTO Cars(brand,model,manufacturer,decoration) VALUES ('" . $this->brand . "','" . $this->model . "','" . $this->manufacturer . "','" . $this->decoration . "')";
         $result = $this->conexion->query($sql);
         return $result;
     }
@@ -77,14 +88,14 @@ class Car extends Database
     //Actualizar un coche
     public function updateCar()
     {
-        $sql = "UPDATE Cars SET brand = '" . $this->brand . "', model = '" . $this->model . "', manufacturer = '" . $this->manufacturer . "' WHERE ID = " . $this->idCar;
+        $sql = "UPDATE Cars SET brand = '" . $this->brand . "', model = '" . $this->model . "', manufacturer = '" . $this->manufacturer . "',decoration = '" . $this->decoration . "' WHERE id_car = " . $this->id_car;
         $result = $this->conexion->query($sql);
         return $result;
     }
     //Eliminar un coche
     public function deleteCar()
     {
-        $sql = "DELETE FROM Cars WHERE ID = " . $this->idCar;
+        $sql = "DELETE FROM Cars WHERE ID = " . $this->id_car;
         $result = $this->conexion->query($sql);
         $this->__destruct();
         return $result;

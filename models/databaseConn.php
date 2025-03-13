@@ -16,6 +16,9 @@ class Database
     {
         $this->conexion->close();
     }
+    public function query($sql){
+        return $this->conexion->query($sql);
+    }
 }
 
 ?>

@@ -4,13 +4,13 @@ $action = $_GET["action"] ?? "";
 //Segun lo que recibamos en el action, hacemos una cosa u otra
 switch ($action) {
 	case "register":
-		userController::addUser();
+		UserController::addUser();
 		break;
 	case "check":
-		userController::login();
+		UserController::login();
 		break;
 	default:
-		userController::showUsers();
+		UserController::showUsers();
 		break;
 }
 
@@ -37,7 +37,7 @@ class UserController
 	}
 	public static function addUser()
 	{
-		//recibimos los datos enviados en el formulario y los guardamso en una variable
+		//recibimos los datos enviados en el formulario y los guardamos en una variable
 		$nombre = $_POST['nombreUsuario'] ?? '';
 		$apellido = $_POST['apellidosUsuario'] ?? '';
 		$email = $_POST['email'] ?? '';
