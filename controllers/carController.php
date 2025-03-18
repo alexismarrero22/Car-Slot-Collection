@@ -17,6 +17,7 @@ class CarController
         $marca = $_POST['marcaCoche'] ?? '';
         $modelo = $_POST['modeloCoche'] ?? '';
         $fabricante = $_POST['fabricanteCoche'] ?? '';
+        $decoration = $_POST['imagenCoche'] ?? '';
         
         //comprobamos que no esten vacías
         if (empty($marca) || empty($modelo) || empty($fabricante) ) {
@@ -27,22 +28,15 @@ class CarController
         $coche->setBrand($marca);   
         $coche->setModel($modelo);
         $coche->setManufacturer($fabricante);
-        //Directorio donde se guardan las imagenes
-        $directorio = "../uploads/";
-        //Nombre del archivo
-        $nombreImagen = basename($_FILES["imagenCoche"]["name"]);
-        $rutaImagen = $directorio . $nombreImagen;
-        //Mover la imagen al directorio
-        if (move_uploaded_file($_FILES["imagenCoche"]["tmp_name"], $rutaImagen)) { //movemos el archivo desde la ruta temporal a la ruta que queremos
-            $coche->setDecoration($rutaImagen); //guardamos la ruta de la imagen en el objeto coche
-            if ($coche->saveCar()) {
-                echo "Coche añadido correctamente";
-            } else {
-                echo "Error al añadir el coche";
-            }
-        } else {
-            echo "Error al subir la imagen";
+        //vamos a convertir la imagen en formato binario para poder guardarla en la base de datos
+        if(isset($_FILES['imagenCoche'])){
+            $imagen = $_FILES['imagenCoche']['tmp_name'];
+            $imagen = file_get_contents($imagen);
+            $imagen = base64_encode($imagen);
+            $coche->setDecoration($imagen);
         }
+        //guardamos el coche y redirigimos a la página de la colección
+        $coche->saveCar();
         header("Location: ../miColeccion.php");
      
         
@@ -65,5 +59,10 @@ class CarController
             }
         }
     }
+    public static function showImages(){
+        
+
+    }
+    
 }
 ?>
