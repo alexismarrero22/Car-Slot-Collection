@@ -1,58 +1,44 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const carrusel = document.querySelector(".carrusel");
-    let currentIndex = 0;
+document.addEventListener("DOMContentLoaded", function () {
+    const carruselContainer = document.getElementById("carrusel");
+    const prevButton = document.getElementById("prev"); // Botón "Anterior"
+    const nextButton = document.getElementById("next"); // Botón "Siguiente"
 
-    //obtener imagenes de la base de datos
-    fetch("http://localhost/proyecto/controllers/getImages.php")
-        .then(response => response.json())
-        .then(images => {
-            if (images.length === 0) {
-                carrusel.innerHTML = "<p>No hay imagenes disponibles</p>";
-                return;
-            }
-
-            //agregar imagenes al carrusel
-            images.forEach(imgSrc => {
-                const img = document.createElement("img");
-                img.src = imgSrc;
-                carrusel.appendChild(img);
-            });
-
-            updateCarrusel(); // iniciar el carrusel
+    // Realiza la petición para obtener las imágenes en formato HTML
+    fetch("http://localhost/proyecto/controllers/carController.php?action=showImages")
+        .then(response => response.text()) // La respuesta es HTML
+        .then(html => {
+            carruselContainer.innerHTML = html; // Inserta las imágenes en el carrusel
+            iniciarCarrusel(); // Llama a la función que activa el carrusel
         })
-        .catch(error => console.error("Error al cargar las imagenes: ", error));
+        .catch(error => console.error("Error al cargar las imágenes del carrusel:", error));
 
-    //funcion para actualizar el carrusel
-    function updateCarrusel() {
-        const totalImages = document.querySelectorAll(".carrusel img").length;
-        if (totalImages > 0) {
-            carrusel.computedStyleMap.transform = `translateX(-${currentIndex * 100}%)`;
+    function iniciarCarrusel() {
+        let imagenes = carruselContainer.querySelectorAll("img");
+        let indiceActual = 0;
+
+        function mostrarImagen(indice) {
+            imagenes.forEach(img => img.style.display = "none"); // Oculta todas
+            imagenes[indice].style.display = "block"; // Muestra la actual
+        }
+
+        function siguienteImagen() {
+            indiceActual = (indiceActual + 1) % imagenes.length;
+            mostrarImagen(indiceActual);
+        }
+
+        function anteriorImagen() {
+            indiceActual = (indiceActual - 1 + imagenes.length) % imagenes.length;
+            mostrarImagen(indiceActual);
+        }
+
+        // Mostrar la primera imagen
+        if (imagenes.length > 0) {
+            mostrarImagen(indiceActual);
+
+            // Eventos para los botones
+            nextButton.addEventListener("click", siguienteImagen);
+            prevButton.addEventListener("click", anteriorImagen);
         }
     }
-
-    //boton siguiente
-    document.querySelector(".next").addEventListener("click", function () {
-        const totalImages = document.querySelectorAll(".carrusel img").length;
-        if (currentIndex < totalImages - 1) {
-            currentIndex++;
-            console.log("se mueve");
-        } else {
-            currentIndex = 0; //volver a empezar
-        }
-        updateCarrusel();
-
-    });
-
-    //boton anterior
-    document.querySelector(".prev").addEventListener("click", function () {
-        const totalImages = document.querySelectorAll(".carrusel img").length;
-        if (currentIndex > 0) {
-            currentIndex--;
-        } else {
-            currentIndex = totalImages - 1; //Ir al final
-        }
-        updateCarrusel();
-
-    });
-
 });
+

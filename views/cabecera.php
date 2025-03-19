@@ -23,7 +23,6 @@ session_start();
             <nav>
                 <ul>
                     <li><a href="index.php">Inicio</a></li>
-                    <li><a href="colecciones.php">Colecciones</a></li>
                     <li><a href="registro.php">Registro</a></li>
                     <li><a href="contacto.php">Contacto</a></li>
                 </ul>

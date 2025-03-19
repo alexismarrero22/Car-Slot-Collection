@@ -101,7 +101,19 @@ class Car extends Database
         return $result;
     }
 
-
-
+    //Motrar las decoraciones
+    public function getDecorations(){
+        $decorations = [];
+        $sql= "SELECT decoration FROM Cars";
+        $result = $this->conexion->query($sql);
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                $decorations[] = $row['decoration'];
+            }
+        }
+        
+        return $decorations;
+    }
 }
+
 ?>

@@ -18,11 +18,13 @@
             <input type="submit" value="Añadir"><br><br>
         </form>
      </div>
-     <div class="carrusel-container">
-        <h1>hola mono</h1>
-        <button class="prev">&#10094;</button>
-        <div class="carrusel"></div>
-        <button class="next">&#10095;</button>
-     </div>
+      <div id="carrusel-container" style="text-align: center;">
+         <button id="prev">⬅ Anterior</button>
+         <div id="carrusel" style="width: 300px; height: auto; overflow: hidden; display: inline-block;">
+            <!-- Aquí se insertarán las imágenes dinámicamente -->
+         </div>
+         <button id="next">Siguiente ➡</button>
+      </div>
+
      <script src="js/carrusel.js"></script>
 

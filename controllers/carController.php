@@ -9,6 +9,9 @@ switch ($action) {
     case "show":
         CarController::showCar();
         break;
+    case "showImages":
+        CarController::showImages();
+        break;
 }
 class CarController
 {
@@ -60,9 +63,17 @@ class CarController
         }
     }
     public static function showImages(){
+        $coche = new Car();
+        $decoraciones = $coche->getDecorations(); //llamamos a la función del modelo que nos devuelve las decoraciones
+        header('Content-type: application/json');
+        foreach ($decoraciones as $decoracion) {
+            echo '<img src="data:image/jpeg;base64,' . $decoracion . '" alt="Imagen de coche" style="max-width: 100%; height: auto; margin: 5px;">';
+        }
+    }
         
 
-    }
+    
+    
     
 }
 ?>
