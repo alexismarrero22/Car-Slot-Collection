@@ -69,7 +69,8 @@ class UserController
 			// Usuario encontrado, se puede iniciar sesión
 			session_start();
 			$_SESSION['users_id'] = $usuario['id'];
-			$_SESSION['users_email'] = $usuario['email'];
+			$_SESSION['user_email'] = $usuario['email'];
+		
 
 
 			header('Location: ../index.php');
@@ -83,7 +84,7 @@ class UserController
 
 
 }
-//userController::showUsers(); //forma de llamar a una función estática
+
 
 
 

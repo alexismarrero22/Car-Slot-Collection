@@ -63,11 +63,30 @@ class Car extends Database
 
 
     //Añadir un coche
-    public function saveCar()
+    public function saveCar($brand,$model,$manufacturer,$decoration,$userId)
     {
         $sql = "INSERT INTO Cars(brand,model,manufacturer,decoration) VALUES ('" . $this->brand . "','" . $this->model . "','" . $this->manufacturer . "','" . $this->decoration . "')";
-        $result = $this->conexion->query($sql);
-        return $result;
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param("ssss", $this->brand, $this->model, $this->manufacturer, $this->decoration);
+
+        if ($stmt->execute()) {
+            //obtenemos el id del coche que acabamos de añadir
+            $idCar = $this->conexion->insert_id;
+
+            //insertamos la relación en la tabla usercar
+            $sqlUserCar = "INSERT INTO UserCar($userId,id_car) VALUES (?,?)";
+            $stmtUserCar = $this->conexion->prepare($sqlUserCar);
+            $stmtUserCar->bind_param("ii", $_SESSION['id'], $idCar);
+            if($stmtUserCar->execute()){
+                return true; //si todo ha ido bien devolvemos true
+            }else{
+                return false; //error al insertar en la tabla usercar
+            }
+        } else {
+            return false; //error al insertar en la tabla cars
+        }
+
+
     }
     //Mostrar todos los coches
     public function getCars()

@@ -16,17 +16,22 @@ switch ($action) {
 class CarController
 {
     public static function addCar(){
+        //primero obtenemos el id del usuario que ha iniciado sesión
+        session_start();
+        if(!isset($_SESSION['users_id'])){
+            exit("Usuario no auntenticado");
+        }
+        $userId = $_SESSION['users_id'];
         //recibimos los datos enviados en el formulario y los guardamos en una variable
         $marca = $_POST['marcaCoche'] ?? '';
         $modelo = $_POST['modeloCoche'] ?? '';
         $fabricante = $_POST['fabricanteCoche'] ?? '';
-        $decoration = $_POST['imagenCoche'] ?? '';
         
         //comprobamos que no esten vacías
         if (empty($marca) || empty($modelo) || empty($fabricante) ) {
             exit;
         }
-        //Creamos un nuevo objeto Car, le damos sus propiedades e indicamos la ruta para guardar las imagenes
+        //Creamos un nuevo objeto Car, le damos sus propiedades ymanejamos las imagenes
         $coche = new Car();
         $coche->setBrand($marca);   
         $coche->setModel($modelo);
@@ -39,8 +44,12 @@ class CarController
             $coche->setDecoration($imagen);
         }
         //guardamos el coche y redirigimos a la página de la colección
-        $coche->saveCar();
-        header("Location: ../miColeccion.php");
+        if($coche->saveCar($userId,$marca,$modelo,$fabricante,$imagen)){
+            header("Location: ../miColeccion.php");
+        }else{
+            echo "Error al guardar el coche";
+        }
+        //header("Location: ../miColeccion.php");
      
         
     }
