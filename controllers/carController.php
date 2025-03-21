@@ -44,7 +44,7 @@ class CarController
             $coche->setDecoration($imagen);
         }
         //guardamos el coche y redirigimos a la página de la colección
-        if($coche->saveCar($userId,$marca,$modelo,$fabricante,$imagen)){
+        if($coche->saveCar($userId)){
             header("Location: ../miColeccion.php");
         }else{
             echo "Error al guardar el coche";
@@ -74,7 +74,6 @@ class CarController
     public static function showImages(){
         $coche = new Car();
         $decoraciones = $coche->getDecorations(); //llamamos a la función del modelo que nos devuelve las decoraciones
-        header('Content-type: application/json');
         foreach ($decoraciones as $decoracion) {
             echo '<img src="data:image/jpeg;base64,' . $decoracion . '" alt="Imagen de coche" style="max-width: 100%; height: auto; margin: 5px;">';
         }
