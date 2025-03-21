@@ -45,11 +45,13 @@ class CarController
         }
         //guardamos el coche y redirigimos a la página de la colección
         if($coche->saveCar($userId)){
-            header("Location: ../miColeccion.php");
+            $_SESSION['add_car_mensaje'] = "Coche añadido correctamente";
+            
         }else{
-            echo "Error al guardar el coche";
+            $_SESSION['add_car_mensaje'] = "Error al añadir el coche";
+            
         }
-        //header("Location: ../miColeccion.php");
+        header("Location: ../miColeccion.php");
      
         
     }

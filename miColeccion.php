@@ -28,3 +28,11 @@
 
      <script src="js/carrusel.js"></script>
 
+<?php 
+if(isset($_SESSION['add_car_mensaje'])){
+    echo "<script>alert('".$_SESSION['add_car_mensaje']."');</script>";
+    unset($_SESSION['add_car_mensaje']);
+}
+
+require_once("views/pieDePagina.php"); 
+?>
