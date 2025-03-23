@@ -12,6 +12,9 @@ switch ($action) {
     case "showImages":
         CarController::showImages();
         break;
+    case "showMyOwnImages":
+        CarController::showMyOwnImages();
+        break;
 }
 class CarController
 {
@@ -76,6 +79,19 @@ class CarController
     public static function showImages(){
         $coche = new Car();
         $decoraciones = $coche->getDecorations(); //llamamos a la función del modelo que nos devuelve las decoraciones
+        foreach ($decoraciones as $decoracion) {
+            echo '<img src="data:image/jpeg;base64,' . $decoracion . '" alt="Imagen de coche" style="max-width: 100%; height: auto; margin: 5px;">';
+        }
+    }
+    public static function showMyOwnImages(){
+        //primero obtenemos el id del usuario que ha iniciado sesión
+        session_start();
+        if(!isset($_SESSION['users_id'])){
+            exit("Usuario no auntenticado");
+        }
+        $userId = $_SESSION['users_id'];
+        $coche = new Car();
+        $decoraciones = $coche->getMyOwnDecorations($userId); //llamamos a la función del modelo que nos devuelve las decoraciones
         foreach ($decoraciones as $decoracion) {
             echo '<img src="data:image/jpeg;base64,' . $decoracion . '" alt="Imagen de coche" style="max-width: 100%; height: auto; margin: 5px;">';
         }

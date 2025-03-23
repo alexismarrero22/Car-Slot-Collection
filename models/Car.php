@@ -127,6 +127,18 @@ class Car extends Database
         
         return $decorations;
     }
+    public function getMyOwnDecorations($userId): array
+    {
+        $decorations = [];
+        $sql = "SELECT decoration FROM cars WHERE id_car IN (SELECT id_car FROM usercar WHERE id = " . $userId . ")";
+        $result = $this->conexion->query($sql);
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                $decorations[] = $row['decoration'];
+            }
+        }
+        return $decorations;
+    }
 }
 
 ?>

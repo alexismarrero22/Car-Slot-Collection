@@ -2,9 +2,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const carruselContainer = document.getElementById("carrusel");
     const prevButton = document.getElementById("prev"); // Botón "Anterior"
     const nextButton = document.getElementById("next"); // Botón "Siguiente"
+    const rutaActual = window.location.pathname; // Ruta actual de la página
+    let endpoint = "";
 
+    if (rutaActual.includes("index.php")) {
+        // Si la ruta actual es index.php, se obtienen todas las imágenes
+        endpoint = "http://localhost/proyecto/controllers/carController.php?action=showImages";
+    } else if (rutaActual.includes("miColeccion.php")) {
+        // Si la ruta actual es miColeccion.php, se obtienen las imágenes del usuario
+        endpoint = "http://localhost/proyecto/controllers/carController.php?action=showMyOwnImages";
+    }
     // Realiza la petición para obtener las imágenes en formato HTML
-    fetch("http://localhost/proyecto/controllers/carController.php?action=showImages")
+    fetch(endpoint)
         .then(response => response.text()) // La respuesta es HTML
         .then(html => {
             carruselContainer.innerHTML = html; // Inserta las imágenes en el carrusel
@@ -41,4 +50,3 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
-
