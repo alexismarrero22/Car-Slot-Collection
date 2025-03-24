@@ -1,5 +1,5 @@
 <?php
-include "../models/Car.php";
+require_once __DIR__ . "/../models/Car.php";
 $action = $_GET["action"] ?? "";
 //Segun lo que recibamos en el action, hacemos una cosa u otra
 switch ($action) {
@@ -96,10 +96,38 @@ class CarController
             echo '<img src="data:image/jpeg;base64,' . $decoracion . '" alt="Imagen de coche" style="max-width: 100%; height: auto; margin: 5px;">';
         }
     }
+
+    public static function showMyOwnCars(){
+        //primero obtenemos el id del usuario que ha iniciado sesión
+        if(session_status() === PHP_SESSION_NONE){
+            session_start();
+        }
+        if(!isset($_SESSION['users_id'])){
+            exit("Usuario no auntenticado");
+        }
+        $userId = $_SESSION['users_id'];
+        $coche = new Car();
+        $datos = $coche->getMyOwnCars($userId);
+        if (is_string($datos)) {
+            echo $datos;
+        } else {
+            //para no meter html en el controlador, creamos una plantilla a parte
+            while ($fila = $datos->fetch_assoc()) {
+                $plantilla = file_get_contents(__DIR__ . '/carListTemplate.php');
+                echo str_replace(
+                    ['{brand}', '{model}', '{manufacturer}'],
+                    [$fila["brand"], $fila["model"], $fila["manufacturer"]],
+                    $plantilla
+                );
+            }
+        }
+    }
+    
         
 
     
     
     
 }
+
 ?>

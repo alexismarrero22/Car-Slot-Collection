@@ -25,6 +25,23 @@
          </div>
          <button id="next">Siguiente ➡</button>
       </div>
+      <div id="tablaCoches">
+      <h1>Mi Colección</h1><br>
+      <table>
+        <tr>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Fabricante</th>
+        </tr>
+        <?php
+         require_once realpath(__DIR__ . "/models/Car.php");
+         require_once("controllers/carController.php");
+         CarController::showMyOwnCars();
+        ?>
+      </table>
+
+      </div>
+    
 
      <script src="js/carrusel.js"></script>
 

@@ -1,7 +1,5 @@
 <tr>
-    <td>{idCar}</td>
     <td>{brand}</td>
     <td>{model}</td>
     <td>{manufacturer}</td>
-    <td>{decoration}/td>
 </tr><br>

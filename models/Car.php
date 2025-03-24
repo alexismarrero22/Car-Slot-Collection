@@ -139,6 +139,16 @@ class Car extends Database
         }
         return $decorations;
     }
+    public function getMyOwnCars($userId){    
+        $sql = "SELECT brand, model, manufacturer FROM cars WHERE id_car IN (SELECT id_car FROM usercar WHERE id = " . $userId . ")";
+        $result = $this->conexion->query($sql);
+        if ($result->num_rows > 0){
+             return $result;
+        }else{
+            return "No hay coches en tu colección";
+        }
+   
+    }
 }
 
 ?>
