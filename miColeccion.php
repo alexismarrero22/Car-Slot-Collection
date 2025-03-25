@@ -32,6 +32,7 @@
             <th>Marca</th>
             <th>Modelo</th>
             <th>Fabricante</th>
+            <th>Editar</th>
         </tr>
         <?php
          require_once realpath(__DIR__ . "/models/Car.php");
@@ -49,6 +50,10 @@
 if(isset($_SESSION['add_car_mensaje'])){
     echo "<script>alert('".$_SESSION['add_car_mensaje']."');</script>";
     unset($_SESSION['add_car_mensaje']);
+}
+if(isset($_SESSION['delete_car_mensaje'])){
+    echo "<script>alert('".$_SESSION['delete_car_mensaje']."');</script>";
+    unset($_SESSION['delete_car_mensaje']);
 }
 
 require_once("views/pieDePagina.php"); 

@@ -15,6 +15,12 @@ switch ($action) {
     case "showMyOwnImages":
         CarController::showMyOwnImages();
         break;
+    case "delete":
+        CarController::deleteCar();
+        break;
+    case "update":
+        CarController::updateCar();
+        break;
 }
 class CarController
 {
@@ -115,14 +121,56 @@ class CarController
             while ($fila = $datos->fetch_assoc()) {
                 $plantilla = file_get_contents(__DIR__ . '/carListTemplate.php');
                 echo str_replace(
-                    ['{brand}', '{model}', '{manufacturer}'],
-                    [$fila["brand"], $fila["model"], $fila["manufacturer"]],
+                    ['{id_car}', '{brand}', '{model}', '{manufacturer}'],
+                    [$fila["id_car"], $fila["brand"], $fila["model"], $fila["manufacturer"]],
                     $plantilla
                 );
             }
         }
     }
-    
+    public static function deleteCar(){
+        if(session_status() === PHP_SESSION_NONE){
+            session_start();
+        }
+        if(!isset($_SESSION['users_id'])){
+            exit("Usuario no auntenticado");
+        }
+        $carId = $_POST['id_car'] ?? '';
+        if(empty($carId)){
+            exit("No se ha recibido el id del coche");
+        }
+        $coche = new Car();
+        $resultado = $coche->deleteCar( $_SESSION['users_id'],$carId);
+        if($resultado){
+            $_SESSION['delete_car_mensaje'] = "Coche eliminado correctamente";
+        }else{
+            $_SESSION['delete_car_mensaje'] = "No se pudo eliminar el coche";
+        }
+        header("Location: ../miColeccion.php");
+    }
+    public static function updateCar(){
+        if(session_status() === PHP_SESSION_NONE){
+            session_start();
+        }
+        if(!isset($_SESSION['users_id'])){
+            exit("Usuario no autenticado");
+        }
+        $carId = $_POST['id_car'] ?? null;
+        $marca = $_POST['marcaCoche'] ?? '';
+        $modelo = $_POST['modeloCoche'] ?? '';
+        $fabricante = $_POST['fabricanteCoche'] ?? '';
+        if((!$carId) || empty($marca) || empty($modelo) || empty($fabricante)){
+            exit("No se han recibido todos los datos necesarios");
+        }
+        $coche = new Car();
+        $resultado = $coche->updateCar($carId,$_SESSION['users_id'],$marca,$modelo,$fabricante);
+        if($resultado){
+            $_SESSION['update_car_mensaje'] = "Coche actualizado correctamente";
+        }else{
+            $_SESSION['update_car_mensaje'] = "No se pudo actualizar el coche";
+        }
+        header("Location: ../miColeccion.php");
+    }
         
 
     

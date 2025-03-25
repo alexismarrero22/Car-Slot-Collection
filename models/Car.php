@@ -99,20 +99,22 @@ class Car extends Database
         return $result;
     }
     //Actualizar un coche
-    public function updateCar()
-    {
-        $sql = "UPDATE Cars SET brand = '" . $this->brand . "', model = '" . $this->model . "', manufacturer = '" . $this->manufacturer . "',decoration = '" . $this->decoration . "' WHERE id_car = " . $this->id_car;
+    public function updateCar($carId, $userId,$marca,$modelo,$fabricante){
+        $sql = "UPDATE Cars SET brand = '$marca', model = '$modelo', manufacturer = '$fabricante' WHERE id_car = $carId AND id_car IN (SELECT id_car FROM usercar WHERE id = $userId)";
         $result = $this->conexion->query($sql);
         return $result;
     }
+    
+        
+    
     //Eliminar un coche
-    public function deleteCar()
-    {
-        $sql = "DELETE FROM Cars WHERE ID = " . $this->id_car;
+    public function deleteCar($userId,$carId){
+        $sql = "DELETE FROM UserCar WHERE id = $userId AND id_car = $carId";
         $result = $this->conexion->query($sql);
-        $this->__destruct();
         return $result;
     }
+
+ 
 
     //Motrar las decoraciones
     public function getDecorations(){
@@ -140,7 +142,7 @@ class Car extends Database
         return $decorations;
     }
     public function getMyOwnCars($userId){    
-        $sql = "SELECT brand, model, manufacturer FROM cars WHERE id_car IN (SELECT id_car FROM usercar WHERE id = " . $userId . ")";
+        $sql = "SELECT * FROM cars WHERE id_car IN (SELECT id_car FROM usercar WHERE id = " . $userId . ")";
         $result = $this->conexion->query($sql);
         if ($result->num_rows > 0){
              return $result;
@@ -148,6 +150,16 @@ class Car extends Database
             return "No hay coches en tu colección";
         }
    
+    }
+
+    public function getCarById($carId, $userId){
+        $sql = "SELECT brand, model, manufacturer FROM cars WHERE id_car = $carId AND id_car IN (SELECT id_car FROM usercar WHERE id = $userId)";
+        $result = $this->conexion->query($sql);
+        if($result->num_rows > 0){
+            return $result->fetch_assoc();
+        }else{
+            return false;
+        }
     }
 }
 
