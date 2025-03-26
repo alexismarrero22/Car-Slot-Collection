@@ -21,6 +21,9 @@ switch ($action) {
     case "update":
         CarController::updateCar();
         break;
+        case "showCollection":
+            CarController::showCarsById();
+            break;
 }
 class CarController
 {
@@ -172,6 +175,29 @@ class CarController
             $_SESSION['update_car_mensaje'] = "No se pudo actualizar el coche";
         }
         header("Location: ../miColeccion.php");
+    }
+
+    //Mostrar la coleccion de un usuario elegido en colecciones.php
+    public static function showCarsById(){
+        $userId = $_POST['id'] ?? '';
+        if(empty($userId) || !is_numeric($userId) || $userId <= 0){
+            exit("No se ha recibido el id del usuario");
+        }
+        $coche = new Car();
+        $datos = $coche->getMyOwnCars($userId);
+        if (is_string($datos)) {
+            echo $datos;
+        } else {
+            //para no meter html en el controlador, creamos una plantilla a parte
+            while ($fila = $datos->fetch_assoc()) {
+                $plantilla = file_get_contents(__DIR__ . '/carListTemplateReadOnly.php');
+                echo str_replace(
+                    ['{id_car}', '{brand}', '{model}', '{manufacturer}'],
+                    [$fila["id_car"], $fila["brand"], $fila["model"], $fila["manufacturer"]],
+                    $plantilla
+                );
+            }
+        }
     }
         
 

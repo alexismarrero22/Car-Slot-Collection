@@ -74,15 +74,6 @@ class User extends Database
     {
         $sql = "SELECT * FROM Users";
         $result = $this->conexion->query($sql);
-
-        if (!$result) {
-            return "Error en la consulta: " . $this->conexion->error;
-        }
-
-        if ($result->num_rows == 0) {
-            return false;
-        }
-
         return $result; // Devuelve el objeto mysqli_result para que showUsers() lo procese
     }
     //Actualizar un usuario

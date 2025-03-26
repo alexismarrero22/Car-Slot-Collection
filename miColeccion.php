@@ -2,6 +2,7 @@
 <link rel="stylesheet" type="text/css" href="css/carrusel.css">
     <!-- Divisor del contenido -->
      <div>
+        <h1 style="text-align: left;">Añadir Coche</h1><br>
         <form id="nuevoCoche" action="controllers/carController.php?action=register" method="post" enctype="multipart/form-data">
             <label for="marcaCoche">Marca</label><br>
             <input type="text" id="marcaCoche" name="marcaCoche"><br>
@@ -35,7 +36,6 @@
             <th>Editar</th>
         </tr>
         <?php
-         require_once realpath(__DIR__ . "/models/Car.php");
          require_once("controllers/carController.php");
          CarController::showMyOwnCars();
         ?>

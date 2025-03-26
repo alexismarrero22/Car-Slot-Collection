@@ -1,5 +1,5 @@
 <?php
-include "../models/User.php";
+require_once __DIR__ .  "/../models/User.php";
 $action = $_GET["action"] ?? "";
 //Segun lo que recibamos en el action, hacemos una cosa u otra
 switch ($action) {
@@ -9,9 +9,7 @@ switch ($action) {
 	case "check":
 		UserController::login();
 		break;
-	default:
-		UserController::showUsers();
-		break;
+
 }
 
 class UserController
@@ -26,10 +24,10 @@ class UserController
 			//para no meter html en el controlador, creamos una plantilla a parte
 
 			while ($fila = $datos->fetch_assoc()) {
-				$plantilla = file_get_contents('userListTemplate.php');
+				$plantilla = file_get_contents(__DIR__ . '/userListTemplate.php');
 				echo str_replace(
-					['{id}', '{name}', '{surname}', '{email}', '{password}'],
-					[$fila["id"], $fila["name"], $fila["surname"], $fila["email"], $fila["password"]],
+					['{id}', '{name}', '{surname}', '{email}'],
+					[$fila["id"], $fila["name"], $fila["surname"], $fila["email"]],
 					$plantilla
 				);
 			}
