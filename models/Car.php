@@ -153,7 +153,7 @@ class Car extends Database
     }
 
     public function getCarById($carId, $userId){
-        $sql = "SELECT brand, model, manufacturer FROM cars WHERE id_car = $carId AND id_car IN (SELECT id_car FROM usercar WHERE id = $userId)";
+        $sql = "SELECT id_car, brand, model, manufacturer FROM cars WHERE id_car = $carId AND id_car IN (SELECT id_car FROM usercar WHERE id = $userId)";
         $result = $this->conexion->query($sql);
         if($result->num_rows > 0){
             return $result->fetch_assoc();

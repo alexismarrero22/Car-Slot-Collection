@@ -155,11 +155,13 @@ class CarController
         if(!isset($_SESSION['users_id'])){
             exit("Usuario no autenticado");
         }
-        $carId = $_POST['id_car'] ?? null;
+        $carId = $_POST['car_id'] ?? null;
         $marca = $_POST['marcaCoche'] ?? '';
         $modelo = $_POST['modeloCoche'] ?? '';
         $fabricante = $_POST['fabricanteCoche'] ?? '';
-        if((!$carId) || empty($marca) || empty($modelo) || empty($fabricante)){
+        var_dump($_POST);
+        
+        if (!isset($carId) || !is_numeric($carId) || $carId <= 0 || empty($marca) || empty($modelo) || empty($fabricante)) {
             exit("No se han recibido todos los datos necesarios");
         }
         $coche = new Car();

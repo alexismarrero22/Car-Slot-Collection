@@ -19,7 +19,7 @@
 
 ?>
 <form action="controllers/carController.php?action=update" method="post">
-    <input type="hidden" name="id_car" value="<?php echo $datos['id_car']; ?>">
+    <input type="hidden" name="car_id" value="<?php echo htmlspecialchars($datos['id_car']); ?>">
 
     <label for="marcaCoche">Marca</label><br>
     <input type="text" id="marcaCoche" name="marcaCoche" value="<?php echo $datos['brand']; ?>"><br>
