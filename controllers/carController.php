@@ -179,7 +179,7 @@ class CarController
 
     //Mostrar la coleccion de un usuario elegido en colecciones.php
     public static function showCarsById(){
-        $userId = $_POST['id'] ?? '';
+        $userId = $_GET['id_user'] ?? '';
         if(empty($userId) || !is_numeric($userId) || $userId <= 0){
             exit("No se ha recibido el id del usuario");
         }
