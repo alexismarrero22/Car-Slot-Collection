@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="css/carrusel.css">
     <!-- Divisor del contenido -->
      <div>
-        <h1 style="text-align: left;">Añadir Coche</h1><br>
+        <h1>Añadir Coche</h1><br>
         <form id="nuevoCoche" action="controllers/carController.php?action=register" method="post" enctype="multipart/form-data">
             <label for="marcaCoche">Marca</label><br>
             <input type="text" id="marcaCoche" name="marcaCoche"><br>
@@ -13,8 +13,22 @@
             <label for="fabricanteCoche">Fabricante</label><br>
             <input type="text" id="fabricanteCoche" name="fabricanteCoche"><br>
 
+            <label for="nombreRally">Rally</label><br>
+            <input type="text" id="nombreRally" name="nombreRally"><br>
+
+            <label for="edicionRAlly">Edición</label><br>
+            <input type="text" id="edicionRAlly" name="edicionRAlly"><br>
+
+            <label for="paisRally">País</label><br>
+            <input type="text" id="paisRally" name="paisRally"><br>
+
+            <label for="añoRally">Año de celebración</label><br>
+            <input type="text" id="añoRally" name="añoRally"><br>
+
             <label for="imagenCoche">Imagen</label><br>
             <input type="file" id="imagenCoche" name="imagenCoche"><br><br>
+
+            
 
             <input type="submit" value="Añadir"><br><br>
         </form>

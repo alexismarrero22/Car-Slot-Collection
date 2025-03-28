@@ -22,3 +22,4 @@
     </div>
 </div>
 <script src="js/tablaCoches.js"></script>
+<?php require_once("views/pieDePagina.php"); ?>
