@@ -4,7 +4,10 @@ $action = $_GET["action"] ?? "";
 //Segun lo que recibamos en el action, hacemos una cosa u otra
 switch ($action) {
     case "register":
-        CarController::addCar();
+        $carId = CarController::addCar(); //añadimos el coche y guardamos su id
+        //gestionar el error
+        CarController::addRally($carId); //añadimos el rally si se ha enviado información
+        header("Location: ../miColeccion.php");
         break;
     case "show":
         CarController::showCar();
@@ -39,11 +42,7 @@ class CarController
         $modelo = $_POST['modeloCoche'] ?? '';
         $fabricante = $_POST['fabricanteCoche'] ?? '';
 
-        //datos del rally
-        $nombreRally = $_POST['nombreRally'] ?? '';
-        $edicion = $_POST['edicionRAlly'] ?? '';
-        $pais = $_POST['paisRally'] ?? '';
-        $agno = $_POST['agnoRally'] ?? '';
+     
         
         //comprobamos que no esten vacías
         if (empty($marca) || empty($modelo) || empty($fabricante) ) {
@@ -64,6 +63,26 @@ class CarController
         //guardamos el coche y obtenemos su id
         $carId = $coche->saveCar($userId);
         if($carId){
+            return $carId; //devolvemos el id del coche para poder añadir el rally
+        }else{
+             return "Error al añadir el coche";
+            
+        }
+            
+       
+        
+     
+        
+    }
+    public static function addRally($carId){
+        if($carId){
+            //datos del rally
+            $nombreRally = $_POST['nombreRally'] ?? '';
+            $edicion = $_POST['edicionRAlly'] ?? '';
+            $pais = $_POST['paisRally'] ?? '';
+            $agno = $_POST['agnoRally'] ?? '';
+            $algo = "1: $nombreRally, 2: $edicion, 3: $pais, 4: $agno";
+            $_SESSION['algo'] = $algo;
             //creamos y guardamos el rally si se ha enviado información
             if(!empty($nombreRally) && !empty($edicion) && !empty($pais) && !empty($agno)){
                 require_once __DIR__ . "/../models/Rally.php";
@@ -80,9 +99,6 @@ class CarController
             $_SESSION['add_car_mensaje'] = "Error al añadir el coche";
             
         }
-        header("Location: ../miColeccion.php");
-     
-        
     }
     public static function showCar()
     {

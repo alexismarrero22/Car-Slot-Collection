@@ -69,7 +69,7 @@ class Car extends Database
         $stmt = $this->conexion->prepare($sql);
         
         if (!$stmt->execute()) {
-            return false; //error al insertar en la tabla cars
+            return "error al insertar en la tabla cars"; 
         }
 
         //obtenemos el id del coche que acabamos de añadir

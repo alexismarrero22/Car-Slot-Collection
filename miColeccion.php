@@ -23,7 +23,7 @@
             <input type="text" id="paisRally" name="paisRally"><br>
 
             <label for="agnoRally">Año de celebración</label><br>
-            <input type="text" id="agnoRally" name="añoRally"><br>
+            <input type="text" id="agnoRally" name="agnoRally"><br>
 
             <label for="imagenCoche">Imagen</label><br>
             <input type="file" id="imagenCoche" name="imagenCoche"><br><br>
@@ -52,6 +52,7 @@
         <?php
          require_once("controllers/carController.php");
          CarController::showMyOwnCars();
+         echo $_SESSION['algo'];
         ?>
       </table>
 
