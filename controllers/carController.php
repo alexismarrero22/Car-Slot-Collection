@@ -38,6 +38,12 @@ class CarController
         $marca = $_POST['marcaCoche'] ?? '';
         $modelo = $_POST['modeloCoche'] ?? '';
         $fabricante = $_POST['fabricanteCoche'] ?? '';
+
+        //datos del rally
+        $nombreRally = $_POST['nombreRally'] ?? '';
+        $edicion = $_POST['edicionRAlly'] ?? '';
+        $pais = $_POST['paisRally'] ?? '';
+        $agno = $_POST['agnoRally'] ?? '';
         
         //comprobamos que no esten vacías
         if (empty($marca) || empty($modelo) || empty($fabricante) ) {
@@ -55,8 +61,19 @@ class CarController
             $imagen = base64_encode($imagen);
             $coche->setDecoration($imagen);
         }
-        //guardamos el coche y redirigimos a la página de la colección
-        if($coche->saveCar($userId)){
+        //guardamos el coche y obtenemos su id
+        $carId = $coche->saveCar($userId);
+        if($carId){
+            //creamos y guardamos el rally si se ha enviado información
+            if(!empty($nombreRally) && !empty($edicion) && !empty($pais) && !empty($agno)){
+                require_once __DIR__ . "/../models/Rally.php";
+                $rally = new Rally();
+                $rally->setName($nombreRally);
+                $rally->setEdition($edicion);
+                $rally->setCountry($pais);
+                $rally->setYear($agno);
+                $rally->saveRally($carId); //guardamos el rally y mandamos el id del coche para guardar en la tabla carRally
+            }
             $_SESSION['add_car_mensaje'] = "Coche añadido correctamente";
             
         }else{

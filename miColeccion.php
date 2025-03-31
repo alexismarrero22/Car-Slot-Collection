@@ -22,8 +22,8 @@
             <label for="paisRally">País</label><br>
             <input type="text" id="paisRally" name="paisRally"><br>
 
-            <label for="añoRally">Año de celebración</label><br>
-            <input type="text" id="añoRally" name="añoRally"><br>
+            <label for="agnoRally">Año de celebración</label><br>
+            <input type="text" id="agnoRally" name="añoRally"><br>
 
             <label for="imagenCoche">Imagen</label><br>
             <input type="file" id="imagenCoche" name="imagenCoche"><br><br>

@@ -67,8 +67,7 @@ class Car extends Database
     {
         $sql = "INSERT INTO Cars(brand,model,manufacturer,decoration) VALUES ('$this->brand','$this->model','$this->manufacturer','$this->decoration')";
         $stmt = $this->conexion->prepare($sql);
-        //$stmt->bind_param( $this->brand, $this->model, $this->manufacturer, $this->decoration);
-
+        
         if (!$stmt->execute()) {
             return false; //error al insertar en la tabla cars
         }
@@ -79,7 +78,8 @@ class Car extends Database
         //insertamos la relación en la tabla usercar
         $sqlUserCar = "INSERT INTO UserCar(id,id_car) VALUES ($userId,$idCar)";
         $stmtUserCar = $this->conexion->prepare($sqlUserCar);
-        return $stmtUserCar->execute();
+        $stmtUserCar->execute();
+        return $idCar; //devolvemos el id del coche que acabamos de añadir
         
     }
     //Mostrar todos los coches
