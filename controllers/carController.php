@@ -5,9 +5,14 @@ $action = $_GET["action"] ?? "";
 switch ($action) {
     case "register":
         $carId = CarController::addCar(); //añadimos el coche y guardamos su id
-        //gestionar el error
-        CarController::addRally($carId); //añadimos el rally si se ha enviado información
-        header("Location: ../miColeccion.php");
+        if(is_string($carId)){
+            $_SESSION['add_car_mensaje'] = $carId;   
+            header("Location: ../miColeccion.php"); 
+            break; 
+        }
+        $addRallyMessage = CarController::addRally($carId); //añadimos el rally si se ha enviado información
+        $_SESSION['add_car_mensaje'] = $addRallyMessage; //guardamos el mensaje en la sesión
+         header("Location: ../miColeccion.php");
         break;
     case "show":
         CarController::showCar();
@@ -61,13 +66,8 @@ class CarController
             $coche->setDecoration($imagen);
         }
         //guardamos el coche y obtenemos su id
-        $carId = $coche->saveCar($userId);
-        if($carId){
-            return $carId; //devolvemos el id del coche para poder añadir el rally
-        }else{
-             return "Error al añadir el coche";
-            
-        }
+        return $coche->saveCar($userId);
+       
             
        
         
@@ -75,14 +75,12 @@ class CarController
         
     }
     public static function addRally($carId){
-        if($carId){
+      
             //datos del rally
             $nombreRally = $_POST['nombreRally'] ?? '';
             $edicion = $_POST['edicionRAlly'] ?? '';
             $pais = $_POST['paisRally'] ?? '';
             $agno = $_POST['agnoRally'] ?? '';
-            $algo = "1: $nombreRally, 2: $edicion, 3: $pais, 4: $agno";
-            $_SESSION['algo'] = $algo;
             //creamos y guardamos el rally si se ha enviado información
             if(!empty($nombreRally) && !empty($edicion) && !empty($pais) && !empty($agno)){
                 require_once __DIR__ . "/../models/Rally.php";
@@ -91,14 +89,20 @@ class CarController
                 $rally->setEdition($edicion);
                 $rally->setCountry($pais);
                 $rally->setYear($agno);
-                $rally->saveRally($carId); //guardamos el rally y mandamos el id del coche para guardar en la tabla carRally
+                $hasErrorOnSave = $rally->saveRally($carId); //guardamos el rally y mandamos el id del coche para guardar en la tabla carRally
+                if($hasErrorOnSave ===null){
+                    return  "Coche y rally añadidos correctamente";      
+                    
+                }
+
             }
-            $_SESSION['add_car_mensaje'] = "Coche añadido correctamente";
+            return "Error al añadir el rally";
+           
             
-        }else{
-            $_SESSION['add_car_mensaje'] = "Error al añadir el coche";
+        
+          
             
-        }
+        
     }
     public static function showCar()
     {

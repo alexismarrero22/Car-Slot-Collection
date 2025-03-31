@@ -52,7 +52,6 @@
         <?php
          require_once("controllers/carController.php");
          CarController::showMyOwnCars();
-         echo $_SESSION['algo'];
         ?>
       </table>
 
