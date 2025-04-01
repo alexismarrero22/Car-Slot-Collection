@@ -51,4 +51,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+function mostrarDecoracion(id_car) {
+    const contenedor = document.getElementById("decoracion-" + id_car);
+    const imagen = document.getElementById("imagen-" + id_car);
+    if (contenedor.style.display === "none") {
+        //solo cargamos la imagen si no se ha cargado antes
+        if (!imagen.src) {
+            fetch("controllers/carController.php?action=showImagesById&id_car=" + id_car)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        imagen.src = "data:image/jpeg;base64," + data.imagen; // Asigna la imagen al elemento img
+                        contenedor.style.display = "block"; // Muestra el contenedor
+                    } else {
+                        contenedor.innerHTML = "<p>No hay decoraciones disponibles</p>";
+                        contenedor.style.display = "block";
+                    }
+                });
+        } else {
+            contenedor.style.display = "block"; // Muestra el contenedor
+        }
+    } else {
+        contenedor.style.display = "none"; // Oculta el contenedor
+    }
+}
+
 

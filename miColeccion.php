@@ -41,12 +41,17 @@
          <button id="next">Siguiente ➡</button>
       </div>
       <div id="tablaCoches">
-      <h1>Mi Colección</h1><br>
+      <h1>Mi Colección</h1>
       <table>
         <tr>
             <th>Marca</th>
             <th>Modelo</th>
             <th>Fabricante</th>
+            <th>Rally</th>
+            <th>Edición del rally</th>
+            <th>País</th>
+            <th>Año</th>
+            <th>Decoración</th>
             <th>Editar</th>
         </tr>
         <?php

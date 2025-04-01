@@ -129,6 +129,18 @@ class Car extends Database
         
         return $decorations;
     }
+    public function getDecorationsById($id_car){
+        $decorations = [];
+        $sql= "SELECT decoration FROM Cars WHERE id_car = $id_car";
+        $result = $this->conexion->query($sql);
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                $decorations[] = $row['decoration'];
+            }
+        }
+        
+        return $decorations;
+    }
     public function getMyOwnDecorations($userId): array
     {
         $decorations = [];
@@ -142,14 +154,18 @@ class Car extends Database
         return $decorations;
     }
     public function getMyOwnCars($userId){    
-        $sql = "SELECT * FROM cars WHERE id_car IN (SELECT id_car FROM usercar WHERE id = " . $userId . ")";
+        $sql= "SELECT c.id_car, c.brand, c.model, c.manufacturer, r.nameRally, r.edition, r.country, r.year
+                FROM cars c
+                JOIN usercar uc ON c.id_car = uc.id_car
+                LEFT JOIN carRally cr ON c.id_car = cr.id_car
+                LEFT JOIN rallies r ON cr.id_rally = r.id_rally
+                WHERE uc.id = $userId";
         $result = $this->conexion->query($sql);
-        if ($result->num_rows > 0){
-             return $result;
+        if($result->num_rows > 0){
+            return $result;
         }else{
-            return "No hay coches en tu colección";
+            return false;
         }
-   
     }
 
     public function getCarById($carId, $userId){

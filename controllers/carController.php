@@ -129,6 +129,13 @@ class CarController
             echo '<img src="data:image/jpeg;base64,' . $decoracion . '" alt="Imagen de coche" style="max-width: 100%; height: auto; margin: 5px;">';
         }
     }
+    public static function showImagesById($id_car){
+        $coche = new Car();
+        $decoraciones = $coche->getDecorationsById($id_car); //llamamos a la función del modelo que nos devuelve las decoraciones
+        foreach ($decoraciones as $decoracion) {
+            echo '<img src="data:image/jpeg;base64,' . $decoracion . '" alt="Imagen de coche" style="max-width: 100%; height: auto; margin: 5px;">';
+        }
+    }
     public static function showMyOwnImages(){
         //primero obtenemos el id del usuario que ha iniciado sesión
         session_start();
@@ -161,8 +168,8 @@ class CarController
             while ($fila = $datos->fetch_assoc()) {
                 $plantilla = file_get_contents(__DIR__ . '/carListTemplate.php');
                 echo str_replace(
-                    ['{id_car}', '{brand}', '{model}', '{manufacturer}'],
-                    [$fila["id_car"], $fila["brand"], $fila["model"], $fila["manufacturer"]],
+                    ['{id_car}', '{brand}', '{model}', '{manufacturer}', '{nameRally}', '{edition}', '{country}', '{year}'],
+                    [$fila["id_car"], $fila["brand"], $fila["model"], $fila["manufacturer"], $fila["nameRally"], $fila["edition"], $fila["country"], $fila["year"]],
                     $plantilla
                 );
             }
