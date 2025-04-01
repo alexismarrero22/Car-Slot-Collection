@@ -59,7 +59,8 @@ nav ul li a:hover {
     text-align: right;
 }
 
-h1 {
+h1,
+h2 {
     text-align: center;
 }
 
@@ -82,6 +83,6 @@ th {
     background-color: darkgray;
 }
 
-#nuevoCoche {
+form {
     text-align: center;
 }

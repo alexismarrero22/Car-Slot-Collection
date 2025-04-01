@@ -20,8 +20,10 @@
         <input type="submit" value="Registrarse"><br><br>
 
     </form>
-    <button onclick="location.href='inicioSesion.php'">Ya estoy registrado</button>
-    <div id="error" style="color:red;"></div>
+    <div style="text-align: center;">
+        <button onclick="location.href='inicioSesion.php'">Ya estoy registrado</button>
+    </div>
+    
 </div>
 <script src="js/users.js"></script>
 <?php require_once("views/pieDePagina.php"); ?>
