@@ -61,6 +61,12 @@
       </table>
 
       </div>
+      <div  id="modalDecoracion" class="modal" style="display:none;">
+        <div class=""modal-contenido">
+            <span class="cerrar" onclick="cerrarModalDecoracion()">&times;</span>
+            <div id="contenidoModalDecoracion"></div>
+        </div>
+      </div>
     
 
      <script src="js/carrusel.js"></script>

@@ -10,7 +10,6 @@
         <!--Boton ver decoracion-->
         <button type="button" onclick="mostrarDecoracion('{id_car}')">Ver decoración</button>
         <div id="decoracion-{id_car}" style="display:none;" margin-top:10px;>
-            <img id="img-{id_car}" src="" width="200"/>
         </div>
     </td>
     <td>

@@ -29,9 +29,16 @@ switch ($action) {
     case "update":
         CarController::updateCar();
         break;
-        case "showCollection":
-            CarController::showCarsById();
-            break;
+    case "showCollection":
+        CarController::showCarsById();
+        break;
+    case "showImagesById":
+        if(isset($_GET['id_car'])){
+            CarController::showImagesById($_GET['id_car']);
+        }
+        break;
+        
+
 }
 class CarController
 {

@@ -52,27 +52,29 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function mostrarDecoracion(id_car) {
+    console.log(id_car);
     const contenedor = document.getElementById("decoracion-" + id_car);
     const imagen = document.getElementById("imagen-" + id_car);
     if (contenedor.style.display === "none") {
-        //solo cargamos la imagen si no se ha cargado antes
-        if (!imagen.src) {
+        if (!contenedor.dataset.cargado) {
             fetch("controllers/carController.php?action=showImagesById&id_car=" + id_car)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        imagen.src = "data:image/jpeg;base64," + data.imagen; // Asigna la imagen al elemento img
-                        contenedor.style.display = "block"; // Muestra el contenedor
-                    } else {
-                        contenedor.innerHTML = "<p>No hay decoraciones disponibles</p>";
-                        contenedor.style.display = "block";
-                    }
+                .then(response => response.text())
+                .then(html => {
+                    console.log("html recibido:", html); //para saber si el contenido llegó
+                    contenedor.innerHTML = html;
+                    contenedor.style.display = "block";
+                    contenedor.dataset.cargado = "true";
+                })
+                .catch(error => {
+                    console.error("Error al cargar la decoración:", error);
+                    contenedor.innerHTML = "<p>No se pudo cargar la imagen.</p>";
+                    contenedor.style.display = "block";
                 });
         } else {
-            contenedor.style.display = "block"; // Muestra el contenedor
+            contenedor.style.display = "block";
         }
     } else {
-        contenedor.style.display = "none"; // Oculta el contenedor
+        contenedor.style.display = "none";
     }
 }
 
