@@ -59,10 +59,10 @@
          CarController::showMyOwnCars();
         ?>
       </table>
-
+    <link rel="stylesheet" type="text/css" href="css/carSlotCollection.css">
       </div>
-      <div  id="modalDecoracion" class="modal" style="display:none;">
-        <div class=""modal-contenido">
+      <div  id="modalDecoracion" class="modal">
+        <div class="modal-contenido">
             <span class="cerrar" onclick="cerrarModalDecoracion()">&times;</span>
             <div id="contenidoModalDecoracion"></div>
         </div>

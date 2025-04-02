@@ -52,30 +52,24 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function mostrarDecoracion(id_car) {
-    console.log(id_car);
-    const contenedor = document.getElementById("decoracion-" + id_car);
-    const imagen = document.getElementById("imagen-" + id_car);
-    if (contenedor.style.display === "none") {
-        if (!contenedor.dataset.cargado) {
-            fetch("controllers/carController.php?action=showImagesById&id_car=" + id_car)
-                .then(response => response.text())
-                .then(html => {
-                    console.log("html recibido:", html); //para saber si el contenido llegó
-                    contenedor.innerHTML = html;
-                    contenedor.style.display = "block";
-                    contenedor.dataset.cargado = "true";
-                })
-                .catch(error => {
-                    console.error("Error al cargar la decoración:", error);
-                    contenedor.innerHTML = "<p>No se pudo cargar la imagen.</p>";
-                    contenedor.style.display = "block";
-                });
-        } else {
-            contenedor.style.display = "block";
-        }
-    } else {
-        contenedor.style.display = "none";
-    }
+    fetch("controllers/carController.php?action=showImagesById&id_car=" + id_car)
+        .then(response => response.text())
+        .then(html => {
+            const modal = document.getElementById("modalDecoracion");
+            const contenido = document.getElementById("contenidoModalDecoracion");
+
+            contenido.innerHTML = html;
+            modal.style.display = "block";
+        })
+        .catch(error => {
+            alert("No se pudo cargar la decoración.");
+            console.error(error);
+        });
 }
+
+function cerrarModalDecoracion() {
+    document.getElementById("modalDecoracion").style.display = "none";
+}
+
 
 

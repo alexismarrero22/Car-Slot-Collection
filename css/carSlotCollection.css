@@ -86,3 +86,45 @@ th {
 form {
     text-align: center;
 }
+
+.modal {
+    display: none;
+    position: fixed;
+    /* Esto lo convierte en flotante */
+    z-index: 999;
+    /* Asegura que esté por encima */
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Cubre toda la pantalla */
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Fondo semitransparente */
+}
+
+.modal-contenido {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: fit-content;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.cerrar {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cerrar:hover {
+    color: black;
+}
