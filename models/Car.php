@@ -168,6 +168,23 @@ class Car extends Database
         }
     }
 
+    //funcion que nos da todos los datos de un coche para poder modificarlos
+    public function getCarWithRally($carId, $userId){
+        $sql = "SELECT c.id_car, c.brand, c.model, c.manufacturer, c.decoration,
+                     r.id_rally, r.nameRally, r.edition, r.country, r.year
+                FROM cars c
+                JOIN userCar uc ON c.id_car = uc.id_car
+                LEFT JOIN carRally cr ON c.id_car = cr.id_car
+                LEFT JOIN rallies r ON cr.id_rally = r.id_rally
+                WHERE uc.id = $userId AND c.id_car = $carId";
+        $result = $this->conexion->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+
     public function getCarById($carId, $userId){
         $sql = "SELECT id_car, brand, model, manufacturer FROM cars WHERE id_car = $carId AND id_car IN (SELECT id_car FROM usercar WHERE id = $userId)";
         $result = $this->conexion->query($sql);

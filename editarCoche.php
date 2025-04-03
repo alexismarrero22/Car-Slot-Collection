@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once __DIR__ . '/models/Car.php';
+    require_once __DIR__ . '/controllers/carController.php';
 
     if (!isset($_SESSION['users_id'])) {
         exit("Usuario no autenticado");
@@ -11,8 +11,9 @@
         exit("ID de coche no proporcionado");
     }
 
-    $coche = new Car();
-    $datos = $coche->getCarById($carId, $_SESSION['users_id']);
+ 
+    $result = CarController::getCarWithRallyById($carId, $_SESSION['users_id']);
+    $datos = $result ? $result->fetch_assoc() : null;
     if(!$datos){
         exit("No se ha encontrado el coche");
     }
@@ -28,6 +29,7 @@
     </div><br>
     <form action="controllers/carController.php?action=update" method="post">
         <input type="hidden" name="car_id" value="<?php echo htmlspecialchars($datos['id_car']); ?>">
+        <input type="hidden" name="rally_id" value="<?php echo htmlspecialchars($datos['id_rally']); ?>">
 
         <label for="marcaCoche">Marca</label><br>
         <input type="text" id="marcaCoche" name="marcaCoche" value="<?php echo $datos['brand']; ?>"><br>
@@ -37,6 +39,18 @@
 
         <label for="fabricanteCoche">Fabricante</label><br>
         <input type="text" id="fabricanteCoche" name="fabricanteCoche" value="<?php echo $datos['manufacturer']; ?>"><br>
+
+        <label for="nombreRally">Rally</label><br>
+        <input type="text" id="nombreRally" name="nombreRally" value="<?php echo $datos['nameRally']; ?>"><br>
+
+        <label for="edicionRally">Edición</label><br>
+        <input type="text" id="edicionRally" name="edicionRally" value="<?php echo $datos['edition']; ?>"><br>
+
+        <label for="paisRally">País</label><br>
+        <input type="text" id="paisRally" name="paisRally" value="<?php echo $datos['country']; ?>"><br>
+
+        <label for="agnoRally">Año</label><br>
+        <input type="text" id="agnoRally" name="agnoRally" value="<?php echo $datos['year']; ?>"><br>
 
         <button type="submit">Actualizar</button>
 

@@ -62,6 +62,13 @@
             $stmtCarRally = $this->conexion->prepare($sqlCarRally);
             $stmtCarRally->execute(); 
         }
+
+        //método para actualizar un rally
+        public function updateRally($rallyId, $nombreRally, $edicionRally, $paisRally, $agnoRally): bool|mysqli_result{
+            $sql = "UPDATE rallies SET nameRally = '$nombreRally', edition = '$edicionRally', country = '$paisRally', year = '$agnoRally' WHERE id_rally = '$rallyId'";
+            $result = $this->conexion->query($sql);
+            return $result;
+        }
   
 
     }

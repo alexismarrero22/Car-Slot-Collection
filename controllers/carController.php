@@ -213,13 +213,31 @@ class CarController
         $marca = $_POST['marcaCoche'] ?? '';
         $modelo = $_POST['modeloCoche'] ?? '';
         $fabricante = $_POST['fabricanteCoche'] ?? '';
+
+        //datos del rally
+        $rallyId = $_POST['rally_id'] ?? null;
+        $nombreRally = $_POST['nombreRally'] ?? '';
+        $edicionRally = $_POST['edicionRally'] ??'';
+        $paisRally = $_POST['paisRally'] ??'';
+        $agnoRally = $_POST['agnoRally'] ??'';
         var_dump($_POST);
         
+        
+        //Actualizar coche
         if (!isset($carId) || !is_numeric($carId) || $carId <= 0 || empty($marca) || empty($modelo) || empty($fabricante)) {
             exit("No se han recibido todos los datos necesarios");
         }
         $coche = new Car();
         $resultado = $coche->updateCar($carId,$_SESSION['users_id'],$marca,$modelo,$fabricante);
+
+        //Actualizar rally
+        if(!is_numeric($rallyId)||empty($nombreRally) || empty($edicionRally) || empty($paisRally) || empty($agnoRally)){
+            exit("No se han recibido todos los datos necesarios del rally");
+        }
+        require_once __DIR__ . "/../models/Rally.php";
+        $rally = new Rally();
+        $rally->updateRally($rallyId, $nombreRally, $edicionRally, $paisRally, $agnoRally);
+        
         if($resultado){
             $_SESSION['update_car_mensaje'] = "Coche actualizado correctamente";
         }else{
@@ -249,6 +267,12 @@ class CarController
                 );
             }
         }
+    }
+
+    //función para recibir los datos que luego vamos a midifcar
+    public static function getCarWithRallyById($carId, $userId){
+        $coche = new Car();
+        return $coche->getCarWithRally($carId, $userId);
     }
         
 
