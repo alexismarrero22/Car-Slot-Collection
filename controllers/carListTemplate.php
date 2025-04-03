@@ -16,6 +16,7 @@
         <!--Boton eliminar-->
         <form action="controllers/carController.php?action=delete" method="post" style="display:inline" onsubmit="return confirm('¿Estás seguro de que quieres borrar este coche?');">
             <input type="hidden" name="id_car" value="{id_car}">
+            <input type="hidden" name="id_rally" value="{id_rally}">
             <button type="submit">Eliminar</button>
         </form>
         <!--Boton modificar-->

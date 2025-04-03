@@ -69,7 +69,13 @@
             $result = $this->conexion->query($sql);
             return $result;
         }
-  
+        
+        //metodo para eliminar un rally
+        public function deleteRally($carId, $rallyId){
+            $sql = "DELETE FROM carrally  WHERE id_car = $carId AND id_rally = $rallyId";
+            $result = $this->conexion->query($sql);
+            return $result;
+        }
 
     }
 

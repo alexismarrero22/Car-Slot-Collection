@@ -154,7 +154,7 @@ class Car extends Database
         return $decorations;
     }
     public function getMyOwnCars($userId){    
-        $sql= "SELECT c.id_car, c.brand, c.model, c.manufacturer, r.nameRally, r.edition, r.country, r.year
+        $sql= "SELECT c.id_car, c.brand, c.model, c.manufacturer, r.id_rally, r.nameRally, r.edition, r.country, r.year
                 FROM cars c
                 JOIN usercar uc ON c.id_car = uc.id_car
                 LEFT JOIN carRally cr ON c.id_car = cr.id_car

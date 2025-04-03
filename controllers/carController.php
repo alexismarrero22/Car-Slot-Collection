@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/../models/Car.php";
+require_once __DIR__ . "/../models/Rally.php";
 $action = $_GET["action"] ?? "";
 //Segun lo que recibamos en el action, hacemos una cosa u otra
 switch ($action) {
@@ -90,7 +91,6 @@ class CarController
             $agno = $_POST['agnoRally'] ?? '';
             //creamos y guardamos el rally si se ha enviado información
             if(!empty($nombreRally) && !empty($edicion) && !empty($pais) && !empty($agno)){
-                require_once __DIR__ . "/../models/Rally.php";
                 $rally = new Rally();
                 $rally->setName($nombreRally);
                 $rally->setEdition($edicion);
@@ -175,8 +175,8 @@ class CarController
             while ($fila = $datos->fetch_assoc()) {
                 $plantilla = file_get_contents(__DIR__ . '/carListTemplate.php');
                 echo str_replace(
-                    ['{id_car}', '{brand}', '{model}', '{manufacturer}', '{nameRally}', '{edition}', '{country}', '{year}'],
-                    [$fila["id_car"], $fila["brand"], $fila["model"], $fila["manufacturer"], $fila["nameRally"], $fila["edition"], $fila["country"], $fila["year"]],
+                    ['{id_car}', '{brand}', '{model}', '{manufacturer}', '{id_rally}', '{nameRally}', '{edition}', '{country}', '{year}'],
+                    [$fila["id_car"], $fila["brand"], $fila["model"], $fila["manufacturer"], $fila["id_rally"], $fila["nameRally"], $fila["edition"], $fila["country"], $fila["year"]],
                     $plantilla
                 );
             }
@@ -193,9 +193,17 @@ class CarController
         if(empty($carId)){
             exit("No se ha recibido el id del coche");
         }
+        $rallyId = $_POST['id_rally'] ??'';
+        if(empty($rallyId) || !is_numeric($rallyId)){
+            exit("No se ha recibido el id del rally");
+        }
         $coche = new Car();
         $resultado = $coche->deleteCar( $_SESSION['users_id'],$carId);
-        if($resultado){
+
+        $rally = new Rally();
+        $resultadoRally = $rally->deleteRally($carId, $rallyId);
+
+        if($resultado && $resultadoRally){
             $_SESSION['delete_car_mensaje'] = "Coche eliminado correctamente";
         }else{
             $_SESSION['delete_car_mensaje'] = "No se pudo eliminar el coche";
@@ -234,7 +242,6 @@ class CarController
         if(!is_numeric($rallyId)||empty($nombreRally) || empty($edicionRally) || empty($paisRally) || empty($agnoRally)){
             exit("No se han recibido todos los datos necesarios del rally");
         }
-        require_once __DIR__ . "/../models/Rally.php";
         $rally = new Rally();
         $rally->updateRally($rallyId, $nombreRally, $edicionRally, $paisRally, $agnoRally);
         
