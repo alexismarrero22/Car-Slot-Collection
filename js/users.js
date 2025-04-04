@@ -28,3 +28,27 @@ function enviarFormulario(event) {
     console.log("informacion no valida");
     return false;
 }
+
+function openUserCollection(userId) {
+    window.open(`coleccionParticular.php?userId=${userId}`, '_blank');
+}
+
+function mostrarDecoracion(id_car) {
+    fetch("controllers/carController.php?action=showImagesById&id_car=" + id_car)
+        .then(response => response.text())
+        .then(html => {
+            const modal = document.getElementById("modalDecoracion");
+            const contenido = document.getElementById("contenidoModalDecoracion");
+
+            contenido.innerHTML = html;
+            modal.style.display = "block";
+        })
+        .catch(error => {
+            alert("No se pudo cargar la decoración.");
+            console.error(error);
+        });
+}
+
+function cerrarModalDecoracion() {
+    document.getElementById("modalDecoracion").style.display = "none";
+}

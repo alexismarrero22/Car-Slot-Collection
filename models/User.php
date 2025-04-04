@@ -106,6 +106,18 @@ class User extends Database
         return $result->fetch_assoc(); // Retorna un array asociativo con el usuario encontrado
     }
 
+    //Mostrar un único usuario por id
+    public function selectUserById($id)
+    {
+        $sql = "SELECT name, surname FROM Users WHERE ID = $id";
+        $result = $this->conexion->query($sql);
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc(); // Retorna un array asociativo con el usuario encontrado
+        } else {
+            return null; // No se encontró el usuario
+        }
+    }
+
 
 
 

@@ -79,6 +79,19 @@ class UserController
 		}
 	}
 
+	public static function showUserNameByid($userId){
+		if(empty($userId) || !is_numeric($userId)){
+			return "desconocido";
+		}
+		$usuario = new User();
+		$datos = $usuario->selectUserById($userId);
+
+		if($datos && isset($datos['name']) && isset($datos['surname'])){
+			return $datos['name'] . " " . $datos['surname'];
+		}
+		return "desconocido";
+	}
+
 
 
 }

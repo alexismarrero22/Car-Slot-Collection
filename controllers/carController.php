@@ -31,7 +31,7 @@ switch ($action) {
         CarController::updateCar();
         break;
     case "showCollection":
-        CarController::showCarsById();
+        CarController::showCarsById($userId); //recibimos el id del usuario que queremos mostrar su colección
         break;
     case "showImagesById":
         if(isset($_GET['id_car'])){
@@ -254,8 +254,7 @@ class CarController
     }
 
     //Mostrar la coleccion de un usuario elegido en colecciones.php
-    public static function showCarsById(){
-        $userId = $_GET['id_user'] ?? '';
+    public static function showCarsById($userId){
         if(empty($userId) || !is_numeric($userId) || $userId <= 0){
             exit("No se ha recibido el id del usuario");
         }
@@ -268,8 +267,8 @@ class CarController
             while ($fila = $datos->fetch_assoc()) {
                 $plantilla = file_get_contents(__DIR__ . '/carListTemplateReadOnly.php');
                 echo str_replace(
-                    ['{id_car}', '{brand}', '{model}', '{manufacturer}'],
-                    [$fila["id_car"], $fila["brand"], $fila["model"], $fila["manufacturer"]],
+                    ['{id_car}', '{brand}', '{model}', '{manufacturer}', '{id_rally}', '{nameRally}', '{edition}', '{country}', '{year}'],
+                    [$fila["id_car"], $fila["brand"], $fila["model"], $fila["manufacturer"], $fila["id_rally"], $fila["nameRally"], $fila["edition"], $fila["country"], $fila["year"]],
                     $plantilla
                 );
             }
