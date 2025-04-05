@@ -164,7 +164,7 @@ class Car extends Database
         if($result->num_rows > 0){
             return $result;
         }else{
-            return false;
+            return "No hay coches en la colección";
         }
     }
 

@@ -31,5 +31,6 @@
             <div id="contenidoModalDecoracion"></div>
         </div>
       </div>
+      <button onclick="window.location.href='colecciones.php'">← Volver a colecciones</button>
 
       <script src="js/users.js"></script>
