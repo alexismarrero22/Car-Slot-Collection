@@ -39,7 +39,7 @@ class UserController
 		$nombre = $_POST['nombreUsuario'] ?? '';
 		$apellido = $_POST['apellidosUsuario'] ?? '';
 		$email = $_POST['email'] ?? '';
-		$password = $_POST['contraseña'] ?? '';
+		$password = $_POST['contrasegna'] ?? '';
 		//comprobamos que no esten vacías
 		if (empty($nombre) || empty($apellido) || empty($email) || empty($password)) {
 			exit;
@@ -57,8 +57,8 @@ class UserController
 
 	public static function login()
 	{
-		$email = $_POST['emailUsuario'] ?? '';
-		$password = $_POST['password'] ?? '';
+		$email = $_POST['email'] ?? '';
+		$password = $_POST['contrasegna'] ?? '';
 		// Llamamos al modelo para obtener el usuario
 		$userModel = new User();
 		$usuario = $userModel->selectUserByEmailAndPassword($email, $password);

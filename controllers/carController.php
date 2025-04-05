@@ -59,7 +59,7 @@ class CarController
         
         //comprobamos que no esten vacías
         if (empty($marca) || empty($modelo) || empty($fabricante) ) {
-            exit;
+            exit("Faltan datos del coche");
         }
         //Creamos un nuevo objeto Car, le damos sus propiedades ymanejamos las imagenes
         $coche = new Car();

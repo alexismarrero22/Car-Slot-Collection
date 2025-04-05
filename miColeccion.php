@@ -3,7 +3,8 @@
     <!-- Divisor del contenido -->
      <div>
         <h1>Añadir Coche</h1><br>
-        <form id="nuevoCoche" action="controllers/carController.php?action=register" method="post" enctype="multipart/form-data">
+        <form id="nuevoCoche" action="controllers/carController.php?action=register" method="post" enctype="multipart/form-data"
+            onsubmit="return enviarFormularioNuevoCoche(event)">
             <label for="marcaCoche">Marca</label><br>
             <input type="text" id="marcaCoche" name="marcaCoche"><br>
 
@@ -16,8 +17,8 @@
             <label for="nombreRally">Rally</label><br>
             <input type="text" id="nombreRally" name="nombreRally"><br>
 
-            <label for="edicionRAlly">Edición</label><br>
-            <input type="text" id="edicionRAlly" name="edicionRAlly"><br>
+            <label for="edicionRally">Edición</label><br>
+            <input type="text" id="edicionRally" name="edicionRally"><br>
 
             <label for="paisRally">País</label><br>
             <input type="text" id="paisRally" name="paisRally"><br>
@@ -28,10 +29,11 @@
             <label for="imagenCoche">Imagen</label><br>
             <input type="file" id="imagenCoche" name="imagenCoche"><br><br>
 
-            
+            <div id="error" style="color: red; font-weight: bold; margin-top: 10px;"></div>
 
             <input type="submit" value="Añadir"><br><br>
         </form>
+        
      </div>
       <div id="carrusel-container" style="text-align: center;">
          <button id="prev">⬅ Anterior</button>
@@ -70,6 +72,7 @@
     
 
      <script src="js/carrusel.js"></script>
+     <script src="js/users.js"></script>
 
 <?php 
 if(isset($_SESSION['add_car_mensaje'])){

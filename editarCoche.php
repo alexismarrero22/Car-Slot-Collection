@@ -27,7 +27,8 @@
     <div id="logo" >
         <img src="img/logo.png" alt="Car Slot Collection">
     </div><br>
-    <form action="controllers/carController.php?action=update" method="post">
+    <form action="controllers/carController.php?action=update" method="post"
+        onsubmit="return enviarFormularioCocheCorregido(event)">
         <input type="hidden" name="car_id" value="<?php echo htmlspecialchars($datos['id_car']); ?>">
         <input type="hidden" name="rally_id" value="<?php echo htmlspecialchars($datos['id_rally']); ?>">
 
@@ -52,8 +53,10 @@
         <label for="agnoRally">Año</label><br>
         <input type="text" id="agnoRally" name="agnoRally" value="<?php echo $datos['year']; ?>"><br>
 
+        <div id="error" style="color: red; font-weight: bold; margin-top: 10px;"></div>
+
         <button type="submit">Actualizar</button>
 
     </form>
-    
+    <script src="js/users.js"></script>
 </body>

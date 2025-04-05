@@ -7,13 +7,17 @@
     <div id="logo">
         <img src="img/logo.png" alt="Car Slot Collection">
     </div><br>
-    <form id="usuarioRegistrado" action="controllers/userController.php?action=check" method="post">
-        <label for="emailUsuario">Email</label><br>
-        <input type="text" id="emailUsuario" name="emailUsuario"><br><br>
+    <form id="usuarioRegistrado" action="controllers/userController.php?action=check" method="post"
+        onsubmit="return enviarformularioUsuarioRegistrado(event)">
+        <label for="email">Email</label><br>
+        <input type="text" id="email" name="email"><br><br>
 
-        <label for="password">Contraseña</label><br>
-        <input type="password" id="password" name="password"><br><br>
+        <label for="contrasegna">Contraseña</label><br>
+        <input type="password" id="contrasegna" name="contrasegna"><br><br>
+
+        <div id="error" style="color: red; font-weight: bold; margin-top: 10px;"></div>
 
         <input type="submit" value="Entrar">
     </form>
+    <script src="js/users.js"></script>
 </body>

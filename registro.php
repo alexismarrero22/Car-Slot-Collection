@@ -14,8 +14,10 @@
         <label for="email">Email</label><br>
         <input type="text" id="email" name="email"><br>
 
-        <label for="contraseña">Contraseña</label><br>
-        <input type="password" id="contraseña" name="contraseña"><br><br>
+        <label for="contrasegna">Contraseña</label><br>
+        <input type="password" id="contrasegna" name="contrasegna"><br><br>
+
+        <div id="error" style="color: red; font-weight: bold; margin-top: 10px;"></div>
 
         <input type="submit" value="Registrarse"><br><br>
 
