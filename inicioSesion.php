@@ -20,11 +20,13 @@
         <input type="submit" value="Entrar">
     </form>
     <script src="js/users.js"></script>
+
 </body>
 <?php
 session_start();
 if (isset($_SESSION['login_message'])) {
     echo "<script>document.getElementById('error').innerHTML = '" . $_SESSION['login_message'] . "';</script>";
+    echo "<script>eliminarMensajeError();</script>";
     unset($_SESSION['login_message']);
 }
 ?>

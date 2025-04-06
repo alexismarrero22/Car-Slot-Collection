@@ -37,6 +37,7 @@ function enviarFormulario(event) {
 
     }
     error.innerHTML = mensajesError.join("<br>");
+    eliminarMensajeError('error');
     console.log("informacion no valida");
     return false;
 }
@@ -66,9 +67,18 @@ function enviarformularioUsuarioRegistrado(event) {
 
     }
     error.innerHTML = mensajesError.join("<br>");
+    eliminarMensajeError('error');
     console.log("informacion no valida");
     return false;
 
+}
+function eliminarMensajeError(elementId) {
+    var error = document.getElementById(elementId);
+    if (error) {
+        setTimeout(function () {
+            error.innerHTML = '';
+        }, 5000);
+    }
 }
 function enviarFormularioNuevoCoche(event) {
     event.preventDefault();
@@ -116,6 +126,7 @@ function enviarFormularioNuevoCoche(event) {
         return true;
     }
     error.innerHTML = mensajesError.join("<br>");
+    eliminarMensajeError('error');
     console.log("informacion no valida");
     return false;
 }
@@ -154,6 +165,7 @@ function enviarFormularioCocheCorregido(event) {
         return true;
     }
     error.innerHTML = mensajesError.join("<br>");
+    eliminarMensajeError('error');
     console.log("informacion no valida");
     return false;
 }
