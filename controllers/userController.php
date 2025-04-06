@@ -57,6 +57,7 @@ class UserController
 
 	public static function login()
 	{
+		session_start();
 		$email = $_POST['email'] ?? '';
 		$password = $_POST['contrasegna'] ?? '';
 		// Llamamos al modelo para obtener el usuario
@@ -65,7 +66,7 @@ class UserController
 
 		if ($usuario) {
 			// Usuario encontrado, se puede iniciar sesión
-			session_start();
+			
 			$_SESSION['users_id'] = $usuario['id'];
 			$_SESSION['user_email'] = $usuario['email'];
 		
@@ -75,7 +76,9 @@ class UserController
 			exit();
 		} else {
 			// Usuario no encontrado
-			echo "Error: Usuario o contraseña incorrectos.";
+			$_SESSION['login_message'] = "Usuario o contraseña incorrectos";
+			header('Location: ../inicioSesion.php');
+			exit();
 		}
 	}
 

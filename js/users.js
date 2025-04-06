@@ -160,7 +160,7 @@ function enviarFormularioCocheCorregido(event) {
 
 
 function openUserCollection(userId) {
-    window.open(`coleccionParticular.php?userId=${userId}`, '_blank');
+    window.location.assign(`coleccionParticular.php?userId=${userId}`);
 }
 
 function mostrarDecoracion(id_car) {
