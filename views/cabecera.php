@@ -10,44 +10,32 @@ session_start();
     <link rel="stylesheet" type="text/css" href="css/carSlotCollection.css">
     <script src="https://kit.fontawesome.com/e8b9164c9d.js" crossorigin="anonymous"></script>
 </head>
-
-<!--si el usuario no está registrado mostramos esta página-->
-<?php if (!isset($_SESSION["users_id"])): ?>
-
-    <body>
-        <!-- Divisor de la cabecera -->
-        <div id="cabecera">
-            <div id="logo">
-                <img src="img/logo.png" alt="Car Slot Collection">
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="index.php">Inicio</a></li>
-                    <li><a href="registro.php">Registro</a></li>
-                    <li><a href="contacto.php">Contacto</a></li>
-                </ul>
-            </nav>
+<body>
+    <div id="cabecera">
+        <div id="logo">
+            <img src="img/logo.png" alt="Car Slot Collection">
         </div>
 
-        <!--si esta registrado mostramos esta otra-->
-    <?php else: ?>
+        <nav>
+            <ul>
+                <li><a href="index.php">Inicio</a></li>
 
-        <body>
-            <!-- Divisor de la cabecera -->
-            <div id="cabecera">
-                <div id="logo">
-                    <img src="img/logo.png" alt="Car Slot Collection">
-                </div>
+                <?php if (!isset($_SESSION["users_id"])): ?>
+                    <li><a href="registro.php">Registro</a></li>
+                <?php else: ?>
+                    <li><a href="miColeccion.php">Mi colección</a></li>
+                    <li><a href="colecciones.php">Colecciones</a></li>
+                <?php endif; ?>
 
-                <nav>
-                    <ul>
-                        <li><a href="index.php">Inicio</a></li>
-                        <li><a href="miColeccion.php">Mi colección</a></li>
-                        <li><a href="colecciones.php">Colecciones</a></li>
-                        <li><a href="contacto.php">Contacto</a></li>
-                        <li><a href="logout.php">Cerrar sesion</a></li>
-                    </ul>
-                </nav>
-            </div>
+                <li><a href="contacto.php">Contacto</a></li>
 
-        <?php endif; ?>
+                <?php if (isset($_SESSION["user_rol"]) && $_SESSION["user_rol"] === "admin"): ?>
+                    <li><a href="views/adminPanel.php">Panel de admin</a></li>
+                <?php endif; ?>
+
+                <?php if (isset($_SESSION["users_id"])): ?>
+                    <li><a href="logout.php">Cerrar sesión</a></li>
+                <?php endif; ?>
+            </ul>
+        </nav>
+    </div>

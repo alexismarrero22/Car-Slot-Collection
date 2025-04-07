@@ -9,6 +9,9 @@ switch ($action) {
 	case "check":
 		UserController::login();
 		break;
+	case "showUsersByAdmin":
+		UserController::showUsersByAdmin();
+		break;
 
 }
 
@@ -32,6 +35,30 @@ class UserController
 				);
 			}
 		}
+	}
+
+	public static function showUsersByAdmin(){
+		session_start();
+		if (!isset($_SESSION['user_rol']) || $_SESSION['user_rol'] !== 'admin') {
+			header('Location: index.php');
+			exit();
+		}
+		$usuario = new User();
+		$datos = $usuario->getUsers();
+		if (is_string($datos)) {
+			echo $datos;
+		} else {
+			//para no meter html en el controlador, creamos una plantilla a parte
+			while ($fila = $datos->fetch_assoc()) {
+				$plantilla = file_get_contents(__DIR__ . '/userListTemplateAdmin.php');
+				echo str_replace(
+					['{id}', '{name}', '{surname}', '{email}', '{rol}', '{estado}', '{acciones}'],
+					[$fila["id"], $fila["name"], $fila["surname"], $fila["email"], $fila["rol"], $fila["activo"], ''],
+					$plantilla
+				);
+			}
+		}
+		
 	}
 	public static function addUser()
 	{
@@ -67,7 +94,7 @@ class UserController
 		if ($usuario) {
 			// Usuario encontrado, se puede iniciar sesión
 			
-			$_SESSION['users_id'] = $usuario['id'];
+			$_SESSION['user_rol'] = $usuario['rol'];
 			$_SESSION['user_email'] = $usuario['email'];
 		
 
