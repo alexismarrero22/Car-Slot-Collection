@@ -93,8 +93,9 @@ class UserController
 
 		if ($usuario) {
 			// Usuario encontrado, se puede iniciar sesión
-			
+
 			$_SESSION['user_rol'] = $usuario['rol'];
+			$_SESSION['users_id'] = $usuario['id'];
 			$_SESSION['user_email'] = $usuario['email'];
 		
 
