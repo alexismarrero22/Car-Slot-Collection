@@ -97,7 +97,7 @@ class User extends Database
     //Mostrar usuarios
     public function getUsers()
     {
-        $sql = "SELECT * FROM Users";
+        $sql = "SELECT * FROM Users WHERE rol != 'admin'"; // Excluimos los administradores de la lista
         $result = $this->conexion->query($sql);
         return $result; // Devuelve el objeto mysqli_result para que showUsers() lo procese
     }

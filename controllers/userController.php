@@ -92,8 +92,13 @@ class UserController
 		$usuario = $userModel->selectUserByEmailAndPassword($email, $password);
 
 		if ($usuario) {
-			// Usuario encontrado, se puede iniciar sesión
-
+			// Comprobamos si el usuario está bloqueado
+			if ($usuario['activo'] == 0) {
+				$_SESSION['login_message'] = "Usuario bloqueado. Contacta con el administrador.";
+				header('Location: ../inicioSesion.php');
+				exit();
+			}
+			// Usuario válido y activo, guardamos los datos en la sesión
 			$_SESSION['user_rol'] = $usuario['rol'];
 			$_SESSION['users_id'] = $usuario['id'];
 			$_SESSION['user_email'] = $usuario['email'];
