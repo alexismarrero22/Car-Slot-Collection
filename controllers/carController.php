@@ -86,7 +86,7 @@ class CarController
       
             //datos del rally
             $nombreRally = $_POST['nombreRally'] ?? '';
-            $edicion = $_POST['edicionRAlly'] ?? '';
+            $edicion = $_POST['edicionRally'] ?? '';
             $pais = $_POST['paisRally'] ?? '';
             $agno = $_POST['agnoRally'] ?? '';
             //creamos y guardamos el rally si se ha enviado información
