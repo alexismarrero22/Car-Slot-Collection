@@ -7,7 +7,7 @@
     <div id="logo">
         <img src="img/logo.png" alt="Car Slot Collection">
     </div><br>
-    <form id="usuarioRegistrado" action="controllers/userController.php?action=check" method="post"
+    <form id="usuarioRegistrado" action="controllers/userController.php?action=check" method="post" autocomplete="off"
         onsubmit="return enviarformularioUsuarioRegistrado(event)">
         <label for="email">Email</label><br>
         <input type="text" id="email" name="email"><br><br>

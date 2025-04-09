@@ -3,7 +3,7 @@
 <div id="contenido">
     <h1>Bienvenidos a Car Slot Collection</h1>
     <h2>Nuevo Usuario</h2>
-    <form id="nuevoUsuario" action="controllers/userController.php?action=register" method="post"
+    <form id="nuevoUsuario" action="controllers/userController.php?action=register" method="post" autocomplete="off"
         onsubmit="return enviarFormulario(event)">
         <label for="nombreUsuario">Nombre</label><br>
         <input type="text" id="nombreUsuario" name="nombreUsuario"><br>

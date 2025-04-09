@@ -2,7 +2,7 @@
 <h1>¡Ponte en contacto con nosotros!</h1>
 <h3 style="text-align: center;">¿Tienes dudas, sugerencias o simplemente quieres hablarnos de tu coche slot favorito?</h3>
 <h3 style="text-align: center;">¡Estaremos encantados de leerte!</h3>
-<form action="index.php" method="post">
+<form action="index.php" method="post" autocomplete="off">
     <label for="nombre">Tu nombre de piloto:</label>
     <input type="text" id="nombre" name="nombre"><br><br>
 
