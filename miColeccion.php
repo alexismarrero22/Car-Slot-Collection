@@ -38,7 +38,7 @@
       <div id="carrusel-container" style="text-align: center;">
          <button id="prev">⬅ Anterior</button>
          <div id="carrusel" style="width: 500px; height: auto; overflow: hidden; display: inline-block;">
-            <!-- Aquí se insertarán las imágenes dinámicamente -->
+            <!-- Aquí se insertarán las imágenes -->
          </div>
          <button id="next">Siguiente ➡</button>
       </div>

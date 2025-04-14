@@ -275,7 +275,7 @@ class CarController
         }
     }
 
-    //función para recibir los datos que luego vamos a midifcar
+    //función para recibir los datos que luego vamos a modifcar
     public static function getCarWithRallyById($carId, $userId){
         $coche = new Car();
         return $coche->getCarWithRally($carId, $userId);
