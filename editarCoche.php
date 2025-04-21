@@ -27,7 +27,7 @@
     <div id="logo" >
         <img src="img/logo.png" alt="Car Slot Collection">
     </div><br>
-    <form action="controllers/carController.php?action=update" method="post"
+    <form id="actualizarCoche" action="controllers/carController.php?action=update" method="post"
         onsubmit="return enviarFormularioCocheCorregido(event)">
         <input type="hidden" name="car_id" value="<?php echo htmlspecialchars($datos['id_car']); ?>">
         <input type="hidden" name="rally_id" value="<?php echo htmlspecialchars($datos['id_rally']); ?>">

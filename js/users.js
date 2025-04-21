@@ -161,7 +161,7 @@ function enviarFormularioCocheCorregido(event) {
 
     if (mensajesError.length === 0) {
         console.log("informacion valida");
-        document.getElementById("nuevoCoche").submit();
+        document.getElementById("actualizarCoche").submit();
         return true;
     }
     error.innerHTML = mensajesError.join("<br>");
